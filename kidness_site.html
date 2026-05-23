@@ -262,59 +262,49 @@
   }
 
   /* ===== ABOUT ===== */
-  .about-hero {
-    width: 100%; height: 85vh;
-    background-size: cover; background-position: center;
-    background-color: #0d0d0b;
-  }
-  .about-section { padding: 6rem 1.5rem; }
-  @media (min-width: 768px) { .about-section { padding: 8rem 2.5rem; } }
+  .about-section { padding: 5rem 1.5rem; }
+  @media (min-width: 768px) { .about-section { padding: 7rem 2.5rem; } }
+
   .about-col {
-    max-width: 400px; margin: 0 auto;
+    max-width: 520px; margin: 0 auto;
   }
-  @media (min-width: 768px) {
-    .about-layout {
-      display: flex; gap: 3rem; align-items: flex-start;
-      max-width: 1000px; margin: 0 auto;
-    }
-    .about-layout .about-col { max-width: 360px; margin: 0; flex: 0 0 auto; }
-  }
-  .about-fig {
-    width: 100%; aspect-ratio: 3 / 4;
-    background-size: cover; background-position: center;
-    background-color: #0d0d0b; margin-top: 2rem;
-    min-height: 55vh;
-  }
-  @media (min-width: 768px) {
-    .about-layout .about-fig {
-      flex: 0 0 50%; margin-top: 0; min-height: 75vh;
-    }
-  }
-  .about-body .text + .text { margin-top: 1.2rem; }
-  .about-principle { margin: 2rem 0; }
-  .about-principle:first-of-type { margin-top: 1.5rem; }
-  .about-principle-label {
+  @media (min-width: 768px) { .about-col { max-width: 480px; } }
+
+  .about-tag {
     font-family: 'Inter', Arial, sans-serif;
-    font-size: 0.4rem; letter-spacing: 0.4em;
-    color: #3a3835; text-transform: uppercase; margin-bottom: 0.3rem;
+    font-size: 0.4rem; font-weight: 300;
+    letter-spacing: 0.35em; color: #3a3835;
+    text-transform: uppercase; margin-bottom: 1.5rem;
   }
-  .about-triptych {
-    display: flex; flex-direction: column;
+
+  .about-title {
+    font-size: 0.85rem; font-weight: 300;
+    letter-spacing: 0.05em; line-height: 1.6;
+    color: #c4c0b4; margin-bottom: 1.2rem;
   }
-  @media (min-width: 768px) {
-    .about-triptych {
-      flex-direction: row;
-    }
+
+  .about-text {
+    font-size: 0.75rem; line-height: 2.2; color: #8a867e;
   }
-  .about-triptych .triptych-item {
-    width: 100%; aspect-ratio: 3 / 4;
-    background-size: cover; background-position: center;
-    background-color: #0d0d0b;
+  .about-text + .about-text { margin-top: 1rem; }
+
+  .about-img {
+    background-size: contain; background-position: center;
+    background-repeat: no-repeat; background-color: #0d0d0b;
   }
-  @media (min-width: 768px) {
-    .about-triptych .triptych-item {
-      flex: 1;
-    }
+  .about-img--169 {
+    width: 100%; aspect-ratio: 16/9;
+  }
+  .about-img--34 {
+    width: 100%; max-width: 400px; aspect-ratio: 3/4; margin: 0 auto;
+  }
+  .about-img--11 {
+    width: 100%; max-width: 520px; aspect-ratio: 1/1; margin: 0 auto;
+  }
+
+  .about-hr {
+    border: none; width: 100%; height: 0.5px;
+    background: #1e1c1a; margin: 5rem 0;
   }
 
   /* GSAP initial */
@@ -332,10 +322,9 @@
 
 <div class="nav-overlay" id="navOverlay">
   <a href="#" data-target="philosophy"><span class="nav-num">01</span>哲学</a>
-  <a href="#" data-target="principles"><span class="nav-num">02</span>原则</a>
-  <a href="#" data-target="works"><span class="nav-num">03</span>作品</a>
-  <a href="#" data-target="contact"><span class="nav-num">04</span>联系</a>
-  <a href="#" data-target="about"><span class="nav-num">05</span>About</a>
+  <a href="#" data-target="works"><span class="nav-num">02</span>作品</a>
+  <a href="#" data-target="contact"><span class="nav-num">03</span>联系</a>
+  <a href="about.html"><span class="nav-num">About</span>About</a>
 </div>
 
 <!-- LANDING -->
@@ -363,7 +352,7 @@
       <div class="section-tag">01</div>
       <h2 class="section-title">轻，还是重？</h2>
       <p class="text">这是一个问题。我们不会回答它。</p>
-      <p class="text">昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛。</p>
+      <p class="text">昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛。而鸿毛的重量是零。零无法承受。</p>
       <p class="text">这不是一个形而上学的问题。它每天都在发生：你买一件衣服，穿两次，不想要了。你扔掉它，没有感觉。这是轻。但这轻让你不安。</p>
       <p class="text">你有一件外套，穿了好几年。袖口磨薄，扣子换过一次。有一天它终于不能穿了。你有一种奇怪的感觉——不是失去了一件物品，是失去了一段时间容器。这是重。</p>
       <p class="text">KIDNESS 不告诉你应该选轻还是选重。我们只是指出：你在选择。</p>
@@ -377,40 +366,6 @@
     </div>
   </div>
 </section>
-
-<hr class="hr">
-
-<section id="principles">
-  <div class="section section--slim">
-    <div class="col">
-      <div class="section-tag">02 / 原则</div>
-      <h2 class="section-title">几个还不完整的假设</h2>
-      <p class="text text--sm">以下不是宣言。宣言是一种过于重的形式。</p>
-
-      <div class="principle">
-        <div class="principle-label">关于轻</div>
-        <h3>一：衣服不该是负担</h3>
-        <p class="text">它不应束缚你的动作，不应强迫你扮演某种角色。极简、留白、沉默——这些不是美学选择，是伦理选择。</p>
-        <div class="aside"><p class="text">（但"不是负担"不等于"没有重量"。）</p></div>
-      </div>
-
-      <div class="principle">
-        <div class="principle-label">关于重</div>
-        <h3>二：衣服应该承受时间</h3>
-        <p class="text">面料随穿着而变化，颜色随水洗而褪变，边缘随摩擦而磨损。这不是质量的缺陷，是质量的证据。一件不会变旧的衣服，也不会变老——它只是突然坏掉。</p>
-        <div class="aside"><p class="text">（但"承受时间"不等于"沉重"。）</p></div>
-      </div>
-
-      <div class="principle">
-        <div class="principle-label">关于之间</div>
-        <h3>三：衣服和人的关系是对等的</h3>
-        <p class="text">你改变衣服，衣服也改变你。这不是一种占有关系——占有是单向的。这是一种互相定义的关系。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="banner" style="background-image:url('kidness_images/bg_banner1.png');"></div>
 
 <section id="works">
   <div class="section">
@@ -499,15 +454,7 @@
 <section id="contact">
   <div class="section section--slim">
     <div class="col">
-      <div class="section-tag">04 / 名字</div>
-
-      <p class="text name-text"><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
-      <p class="text name-text"><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
-      <p class="text name-text"><strong>Kindness.</strong> 之间。不是温柔的善，是清醒的善。是不同的重量之间，互相认出，但不抹消差异。</p>
-
-      <hr class="hr" style="margin:2.5rem auto;">
-
-      <div class="section-tag" style="margin-top:2rem;">联系</div>
+      <div class="section-tag">联系</div>
       <div class="links">
         <span class="label">社交媒体</span>
         <a href="#">Instagram</a>
@@ -524,71 +471,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-hero" style="background-image:url('kidness_images/about_hero.png');"></div>
-
-  <!-- 一、品牌故事 -->
-  <div class="section about-section">
-    <div class="about-layout">
-      <div class="about-col">
-        <div class="section-tag">一 / 品牌故事</div>
-        <div class="about-body">
-          <p class="text">KIDNESS 不记得自己是从哪一刻开始的。只记得一个问题。昆德拉的：只发生一次的事，等于没有发生。如果人只能活一次，那一切选择都轻得没有重力。但人分明感到重。轻和重同时存在——这个矛盾本身就是起点。</p>
-          <p class="text">Kid + Darkness + Kindness。拼在一起不是为了合成一个答案。三个词相互拉扯：轻的、重的、以及让这两者可以共存的清醒。你只能把它们放在一起，承受它们之间的张力。</p>
-          <p class="text">KIDNESS 是一个名字，不是一个结论。把哲学的矛盾从书里拿出来，放到一件衣服上。让矛盾被穿在身上。</p>
-        </div>
-      </div>
-      <div class="about-fig" style="background-image:url('kidness_images/about_story.png');"></div>
-    </div>
-  </div>
-
-  <!-- 二、设计哲学 -->
-  <div class="section about-section">
-    <div class="about-layout">
-      <div class="about-col">
-        <div class="section-tag">二 / 设计哲学</div>
-        <div class="about-body">
-          <div class="about-principle">
-            <div class="about-principle-label">Kid · 轻</div>
-            <p class="text">未被定义的形态。衣服不束缚身体，不规定角色。极简不是风格，是伦理——不给你增加多余的重量。</p>
-          </div>
-          <div class="about-principle">
-            <div class="about-principle-label">Darkness · 重</div>
-            <p class="text">时间在衣服上留下痕迹。面料会旧，边缘会磨损，纽扣会换。旧不是缺陷，是履历。一件不会变旧的衣服也不会变老——它只是突然坏掉。</p>
-          </div>
-          <div class="about-principle">
-            <div class="about-principle-label">Kindness · 之间</div>
-            <p class="text">不是温柔的善意，是清醒地看见双方。轻不否定重，重不压迫轻。人和衣服的关系是对等的——你改变它，它也改变你。</p>
-          </div>
-          <p class="text">KIDNESS 不评判选轻还是选重。它只指出：你在选择。</p>
-        </div>
-      </div>
-      <div class="about-fig" style="background-image:url('kidness_images/about_design.png');"></div>
-    </div>
-  </div>
-
-  <!-- 三、视觉语言 -->
-  <div class="section about-section">
-    <div class="about-layout">
-      <div class="about-col">
-        <div class="section-tag">三 / 视觉语言</div>
-        <div class="about-body">
-          <p class="text">顶光。单光源。全黑背景像时间的负片。人站在画面正中，影子垂直下落。反光地面让一切悬在"之间"——没飘起来，也没沉下去。黑白高反差。银盐颗粒。留白不解释自己。痕迹不修。瑕疵不修。褶皱不修。KIDNESS 只去除伪饰，不去除真实。</p>
-        </div>
-      </div>
-      <div class="about-fig" style="background-image:url('kidness_images/about_visual.png');"></div>
-    </div>
-  </div>
-
-  <!-- Triptych -->
-  <div class="about-triptych">
-    <div class="triptych-item" style="background-image:url('kidness_images/about_triptych_1.png');"></div>
-    <div class="triptych-item" style="background-image:url('kidness_images/about_triptych_2.png');"></div>
-    <div class="triptych-item" style="background-image:url('kidness_images/about_triptych_3.png');"></div>
-  </div>
-</section>
-
 <footer>KIDNESS — a question, not an answer</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
@@ -600,9 +482,12 @@ const toggle = document.getElementById('navToggle'), overlay = document.getEleme
 toggle.addEventListener('click', () => { toggle.classList.toggle('active'); overlay.classList.toggle('open'); });
 overlay.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', e => {
-    e.preventDefault(); overlay.classList.remove('open'); toggle.classList.remove('active');
-    const t = document.getElementById(link.dataset.target);
-    if (t) t.scrollIntoView({ behavior: 'smooth' });
+    overlay.classList.remove('open'); toggle.classList.remove('active');
+    if (link.dataset.target) {
+      e.preventDefault();
+      const t = document.getElementById(link.dataset.target);
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
 
@@ -614,10 +499,6 @@ gsap.to('#landingBg', { y: '8%', ease: 'none', scrollTrigger: { trigger: '.landi
 
 gsap.utils.toArray('section, .banner').forEach(el => {
   gsap.fromTo(el, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
-});
-
-gsap.utils.toArray('.principle').forEach((el, i) => {
-  gsap.fromTo(el, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: .7, delay: i * .1, ease: 'power2.out', scrollTrigger: { trigger: '#principles', start: 'top 80%', toggleActions: 'play none none none' } });
 });
 
 gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '#works', start: 'top 82%', toggleActions: 'play none none none' } });
