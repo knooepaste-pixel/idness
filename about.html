@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIDNESS — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=LXGW+WenKai&family=Noto+Serif+SC:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: #0d0d0b;
+    color: #c4c0b4;
+    font-family: 'LXGW WenKai', 'Noto Serif SC', 'Songti SC', serif;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1.25rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(13,13,11,0.4);
+    backdrop-filter: blur(20px);
+  }
+  .nav-logo {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #c4c0b4; text-decoration: none; font-weight: 300;
+  }
+  .nav-toggle { background: none; border: none; cursor: pointer; padding: 0; }
+  .nav-toggle span {
+    display: block; width: 16px; height: 0.5px; background: #c4c0b4;
+    margin-bottom: 4px; transition: 0.3s;
+  }
+  .nav-toggle span:last-child { margin-bottom: 0; width: 10px; }
+
+  .nav-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0d0d0b; z-index: 40;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s;
+  }
+  .nav-overlay.open { opacity: 1; pointer-events: all; }
+  .nav-overlay a {
+    color: #8a867e; text-decoration: none; font-size: 0.9rem; font-weight: 200; letter-spacing: 0.25em; transition: color 0.3s;
+  }
+  .nav-overlay a:hover { color: #c4c0b4; }
+  .nav-overlay .nav-num {
+    display: block; text-align: center;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.35rem; letter-spacing: 0.35em;
+    color: #3a3835; margin-bottom: 0.25rem;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-section { padding: 5rem 1.5rem; }
+  @media (min-width: 768px) { .about-section { padding: 7rem 2.5rem; } }
+
+  .about-col {
+    max-width: 520px; margin: 0 auto;
+  }
+  @media (min-width: 768px) { .about-col { max-width: 480px; } }
+
+  .about-tag {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; font-weight: 300;
+    letter-spacing: 0.35em; color: #3a3835;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+
+  .about-title {
+    font-size: 0.85rem; font-weight: 300;
+    letter-spacing: 0.05em; line-height: 1.6;
+    color: #c4c0b4; margin-bottom: 1.2rem;
+  }
+
+  .about-text {
+    font-size: 0.75rem; line-height: 2.2; color: #8a867e;
+  }
+  .about-text + .about-text { margin-top: 1rem; }
+
+  .about-img {
+    background-size: contain; background-position: center;
+    background-repeat: no-repeat; background-color: #0d0d0b;
+  }
+  .about-img--169 {
+    width: 100%; aspect-ratio: 16/9;
+  }
+  .about-img--34 {
+    width: 100%; max-width: 400px; aspect-ratio: 3/4; margin: 0 auto;
+  }
+  .about-img--11 {
+    width: 100%; max-width: 520px; aspect-ratio: 1/1; margin: 0 auto;
+  }
+
+  .about-hr {
+    border: none; width: 100%; height: 0.5px;
+    background: #1e1c1a; margin: 5rem 0;
+  }
+
+  /* ===== SECTION ===== */
+  .section { padding: 6rem 1.5rem; }
+  @media (min-width: 768px) { .section { padding: 8rem 2.5rem; } }
+  .section.section--slim { padding: 4rem 1.5rem; }
+  @media (min-width: 768px) { .section.section--slim { padding: 5rem 2.5rem; } }
+
+  .section-tag {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; font-weight: 300;
+    letter-spacing: 0.35em; color: #3a3835;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem; font-weight: 300;
+    letter-spacing: 0.05em; line-height: 1.6;
+    color: #c4c0b4; margin-bottom: 2rem;
+  }
+
+  .text {
+    font-size: 0.8rem; line-height: 2; color: #8a867e;
+  }
+  .text + .text { margin-top: 1rem; }
+
+  .text--sm {
+    font-size: 0.7rem; line-height: 2; color: #6b6760;
+  }
+  .text--xs {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.45rem; letter-spacing: 0.2em;
+    color: #55524c; text-transform: uppercase;
+  }
+  .text--center { text-align: center; }
+
+  .col {
+    max-width: 560px; margin: 0 auto;
+  }
+  @media (min-width: 768px) { .col { max-width: 500px; } }
+
+  .col--wider {
+    max-width: 640px; margin: 0 auto;
+  }
+  @media (min-width: 768px) { .col--wider { max-width: 600px; } }
+
+  /* ===== CONTACT ===== */
+  .name-text { margin-bottom: 1.2rem; }
+  .name-text strong { font-weight: 350; color: #b5b0a6; font-size: 0.75rem; }
+
+  .links { text-align: center; margin: 3rem 0; }
+  .links .label {
+    display: block;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.4rem; letter-spacing: 0.3em;
+    color: #3a3835; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .links a {
+    display: inline-block; color: #6b6760; text-decoration: none;
+    font-size: 0.75rem; font-weight: 200; margin: 0 1rem;
+    transition: color 0.3s;
+  }
+  .links a:hover { color: #c4c0b4; }
+
+  .closing { text-align: center; padding: 2rem 0; }
+  .closing .text { color: #8a867e; margin-bottom: 0.3rem; }
+  .closing .text:last-of-type { color: #6b6760; font-size: 0.65rem; margin-top: 0.8rem; }
+
+  .hr { border: none; width: 1.5rem; height: 0.5px; background: #2a2825; margin: 0 auto; }
+
+  footer {
+    text-align: center; padding: 3rem 1.5rem 4rem;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.25em;
+    color: #2a2825; text-transform: uppercase;
+  }
+
+  /* GSAP initial */
+  section, .about-section, .about-img, .about-hr, .banner, .closing { opacity: 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="kidness_site.html" class="nav-logo">KIDNESS</a>
+  <button class="nav-toggle" id="navToggle" aria-label="menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-overlay" id="navOverlay">
+  <a href="kidness_site.html"><span class="nav-num">← 主站</span>KIDNESS</a>
+  <a href="#" data-target="brand-story"><span class="nav-num">01</span>品牌故事</a>
+  <a href="#" data-target="design-philosophy"><span class="nav-num">02</span>设计哲学</a>
+  <a href="#" data-target="visual-language"><span class="nav-num">03</span>视觉语言</a>
+  <a href="#" data-target="name-breakdown"><span class="nav-num">04</span>名字</a>
+</div>
+
+<!-- BRAND STORY -->
+<section id="brand-story">
+  <div class="about-section">
+    <div class="about-col">
+      <div class="about-tag">01 / 品牌故事</div>
+      <h3 class="about-title">KIDNESS 不记得自己是从哪一刻开始的。只记得一个问题。</h3>
+      <p class="about-text">昆德拉的：只发生一次的事，等于没有发生。如果人只能活一次，那一切选择都轻得没有重力。但人分明感到重。轻和重同时存在——这个矛盾本身就是起点。</p>
+      <p class="about-text">Kid + Darkness + Kindness。拼在一起不是为了合成一个答案。三个词相互拉扯：轻的、重的、以及让这两者可以共存的清醒。你只能把它们放在一起，承受它们之间的张力。</p>
+      <p class="about-text">KIDNESS 是一个名字，不是一个结论。把哲学的矛盾从书里拿出来，放到一件衣服上。让矛盾被穿在身上。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--169" style="background-image:url('kidness_images/about_01.png');"></div>
+</section>
+
+<!-- DESIGN PHILOSOPHY -->
+<section id="design-philosophy">
+  <div class="about-section">
+    <div class="about-col">
+      <h3 class="about-title">02 / 设计哲学</h3>
+      <p class="about-text"><strong style="font-weight:350;color:#b5b0a6;">Kid。</strong>轻。未被定义的形态。衣服不束缚身体，不规定角色。极简不是风格，是伦理——不给你增加多余的重量。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--34" style="background-image:url('kidness_images/about_02.png');"></div>
+
+  <div class="about-section">
+    <div class="about-col">
+      <p class="about-text"><strong style="font-weight:350;color:#b5b0a6;">Darkness。</strong>重。时间在衣服上留下痕迹。面料会旧，边缘会磨损，纽扣会换。旧不是缺陷，是履历。一件不会变旧的衣服也不会变老——它只是突然坏掉。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--11" style="background-image:url('kidness_images/about_03.png');"></div>
+
+  <div class="about-section">
+    <div class="about-col">
+      <p class="about-text"><strong style="font-weight:350;color:#b5b0a6;">Kindness。</strong>之间。不是温柔的善意，是清醒地看见双方。轻不否定重，重不压迫轻。人和衣服的关系是对等的——你改变它，它也改变你。</p>
+      <p class="about-text">KIDNESS 不评判选轻还是选重。它只指出：你在选择。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--34" style="background-image:url('kidness_images/about_04.png');"></div>
+
+  <div class="about-hr"></div>
+</section>
+
+<!-- VISUAL LANGUAGE -->
+<section id="visual-language">
+  <div class="about-section">
+    <div class="about-col">
+      <h3 class="about-title">03 / 视觉语言</h3>
+      <p class="about-text">顶光。单光源。全黑背景像时间的负片。</p>
+      <p class="about-text">人站在画面正中，影子垂直下落。反光地面让一切悬在"之间"——没飘起来，也没沉下去。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--34" style="background-image:url('kidness_images/about_05.png');"></div>
+
+  <div class="about-section">
+    <div class="about-col">
+      <p class="about-text">黑白高反差。银盐颗粒。留白不解释自己。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--11" style="background-image:url('kidness_images/about_06.png');"></div>
+
+  <div class="about-section">
+    <div class="about-col">
+      <p class="about-text">痕迹不修。瑕疵不修。褶皱不修。KIDNESS 只去除伪饰，不去除真实。</p>
+    </div>
+  </div>
+
+  <div class="about-img about-img--11" style="background-image:url('kidness_images/about_07.png');"></div>
+</section>
+
+<!-- NAME BREAKDOWN -->
+<section id="name-breakdown">
+  <div class="about-section">
+    <div class="about-col">
+      <div class="about-tag">04 / 名字</div>
+      <p class="text name-text"><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
+      <p class="text name-text"><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
+      <p class="text name-text"><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL & CLOSING -->
+<section id="contact-section">
+  <div class="about-section section--slim">
+    <div class="about-col">
+      <div class="links">
+        <span class="label">社交媒体</span>
+        <a href="#">Instagram</a>
+        <a href="#">小红书</a>
+        <a href="#">微博</a>
+      </div>
+
+      <div class="closing">
+        <p class="text">这不是品牌宣言。</p>
+        <p class="text">这是一个问题的草稿。</p>
+        <p class="text text--sm">问题没有结论。结论是留给那些不再问问题的人的。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>KIDNESS — a question, not an answer</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+const toggle = document.getElementById('navToggle'), overlay = document.getElementById('navOverlay');
+toggle.addEventListener('click', () => { toggle.classList.toggle('active'); overlay.classList.toggle('open'); });
+overlay.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', e => {
+    overlay.classList.remove('open'); toggle.classList.remove('active');
+    if (link.dataset.target) {
+      e.preventDefault();
+      const t = document.getElementById(link.dataset.target);
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+gsap.utils.toArray('.about-section, .about-img, .about-hr, .closing').forEach(el => {
+  gsap.fromTo(el, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+});
+</script>
+
+</body>
+</html>
