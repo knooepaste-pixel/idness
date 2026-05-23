@@ -2,308 +2,271 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KIDNESS — 轻，还是重</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&family=Noto+Serif+SC:wght@200;300;400;500&family=LXGW+WenKai&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=LXGW+WenKai&family=Noto+Serif+SC:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
-    background: #1a1a18;
-    color: #d9d6cf;
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
+    background: #0d0d0b;
+    color: #c4c0b4;
+    font-family: 'LXGW WenKai', 'Noto Serif SC', 'Songti SC', serif;
     font-weight: 300;
-    line-height: 1.9;
-    letter-spacing: 0.03em;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    padding-top: 0;
   }
 
-  .grain {
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-    background-repeat: repeat; background-size: 200px 200px;
-    pointer-events: none; z-index: 100;
-  }
-
-  /* ===== NAV (mobile-first) ===== */
+  /* ===== NAV ===== */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 2rem;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(17,17,15,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: rgba(13,13,11,0.4);
+    backdrop-filter: blur(20px);
   }
   .nav-logo {
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: #d9d6cf; text-decoration: none; font-weight: 200;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #c4c0b4; text-decoration: none; font-weight: 300;
   }
-  .nav-toggle {
-    background: none; border: none; cursor: pointer;
-    display: flex; flex-direction: column; gap: 4px; padding: 4px;
-  }
+  .nav-toggle { background: none; border: none; cursor: pointer; padding: 0; }
   .nav-toggle span {
-    display: block; width: 18px; height: 1px;
-    background: #d9d6cf; transition: 0.3s;
+    display: block; width: 16px; height: 0.5px; background: #c4c0b4;
+    margin-bottom: 4px; transition: 0.3s;
   }
-  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(3px,3px); }
-  .nav-toggle.active span:nth-child(2) { opacity: 0; }
-  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(3px,-3px); }
+  .nav-toggle span:last-child { margin-bottom: 0; width: 10px; }
 
   .nav-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: #11110f; z-index: 40;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center; gap: 2.5rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.5s ease-out;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0d0d0b; z-index: 40;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s;
   }
   .nav-overlay.open { opacity: 1; pointer-events: all; }
   .nav-overlay a {
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
-    color: #8a867e; text-decoration: none;
-    font-size: 1rem; font-weight: 200;
-    letter-spacing: 0.15em; transition: color 0.3s;
+    color: #8a867e; text-decoration: none; font-size: 0.9rem; font-weight: 200; letter-spacing: 0.25em; transition: color 0.3s;
   }
-  .nav-overlay a:hover { color: #e8e4dc; }
+  .nav-overlay a:hover { color: #c4c0b4; }
   .nav-overlay .nav-num {
-    display: block;
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
-    font-size: 0.45rem; letter-spacing: 0.3em;
-    color: #3a3835; margin-bottom: 0.3rem;
+    display: block; text-align: center;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.35rem; letter-spacing: 0.35em;
+    color: #3a3835; margin-bottom: 0.25rem;
   }
 
-  /* ===== LANDING (mobile) ===== */
+  /* ===== LANDING ===== */
   .landing {
     height: 100dvh; display: flex; flex-direction: column;
     justify-content: center; align-items: center; text-align: center;
-    position: relative; overflow: hidden; background: #11110f;
+    position: relative; overflow: hidden; background: #0d0d0b;
   }
   .landing-bg {
-    position: absolute; inset: -15%;
+    position: absolute; inset: -8%;
     background: url('kidness_images/bg_hero.png') center/cover no-repeat;
-    filter: grayscale(1) brightness(0.2) contrast(1.1);
-    animation: slowzoom 20s ease-in-out infinite alternate;
+    filter: brightness(1.05) contrast(1.1);
   }
-  @keyframes slowzoom {
-    0%   { transform: scale(1); }
-    100% { transform: scale(1.08); }
-  }
-  .landing-inner {
-    position: relative; z-index: 2;
-    opacity: 0; animation: fadeUp 1.8s ease-out 0.4s forwards;
-  }
-  @keyframes fadeUp {
-    0%   { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
+  .landing-inner { position: relative; z-index: 2; }
   .landing-name {
-    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'SimSun', 'Songti SC', serif;
-    font-size: clamp(3rem, 18vw, 6rem);
-    font-weight: 200; letter-spacing: 0.22em;
-    text-transform: uppercase; line-height: 1;
-    margin-bottom: 0.5em; color: #e8e4dc;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: clamp(3.5rem, 16vw, 7rem);
+    font-weight: 100; letter-spacing: 0.15em; text-transform: uppercase; line-height: 1;
+    color: #c4c0b4; margin-bottom: 0.4em;
   }
   .landing-line { display: block; }
-  .landing-line.zh {
-    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'SimSun', 'Songti SC', serif;
-    font-size: 1rem; color: #b5b0a6; }
-  .landing-line.en {
-    font-size: 0.6rem;
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; text-transform: uppercase;
-    color: #6b6760; letter-spacing: 0.3em; margin-top: 0.3rem;
-  }
+  .landing-line.zh { font-size: 0.85rem; letter-spacing: 0.15em; color: #8a867e; font-weight: 200; }
+  .landing-line.en { font-size: 0.45rem; font-family: 'Inter', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.3em; color: #55524c; margin-top: 0.25rem; }
   .landing-marker {
-    position: absolute; bottom: 2rem; left: 50%;
-    transform: translateX(-50%); z-index: 2;
-    opacity: 0; animation: fadeIn 1s ease-out 2s forwards;
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 2;
+    opacity: 0; transition: opacity 1s;
   }
   .landing-marker span {
-    display: block; width: 1px; height: 30px;
-    background: #6b6760; margin: 0 auto 0.4rem;
+    display: block; width: 0.5px; height: 24px; background: #55524c; margin: 0 auto 0.3rem;
     animation: pulseDown 2s ease-in-out infinite;
   }
-  @keyframes pulseDown { 0%,100%{opacity:0.4} 50%{opacity:0.1} }
+  @keyframes pulseDown { 0%,100%{opacity:0.3} 50%{opacity:0.08} }
   .landing-marker em {
-    font-style: normal; font-size: 0.45rem;
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; letter-spacing: 0.25em;
-    color: #6b6760; text-transform: uppercase;
+    font-style: normal; font-size: 0.35rem;
+    font-family: 'Inter', Arial, sans-serif; letter-spacing: 0.3em; color: #55524c; text-transform: uppercase;
   }
 
-  /* ===== SECTIONS (mobile width) ===== */
-  section {
-    padding: 3rem 1.25rem;
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  }
-  section.visible { opacity: 1; transform: translateY(0); }
+  /* ===== SECTION ===== */
+  .section { padding: 6rem 1.5rem; }
+  @media (min-width: 768px) { .section { padding: 8rem 2.5rem; } }
+  .section.section--slim { padding: 4rem 1.5rem; }
+  @media (min-width: 768px) { .section.section--slim { padding: 5rem 2.5rem; } }
 
-  .section-label {
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; font-weight: 200;
-    font-size: 0.5rem; letter-spacing: 0.3em;
-    color: #6b6760; margin-bottom: 1.5rem; text-transform: uppercase;
-  }
-
-  h2 {
-    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'SimSun', 'Songti SC', serif;
-    font-weight: 300; font-size: 1.25rem; line-height: 1.7;
-    margin-bottom: 1.5rem; letter-spacing: 0.02em; color: #e8e4dc;
+  .section-tag {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; font-weight: 300;
+    letter-spacing: 0.35em; color: #3a3835;
+    text-transform: uppercase; margin-bottom: 1.5rem;
   }
 
-  p {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    font-size: 0.9rem; margin-bottom: 1.2rem;
-    color: #b5b0a6; text-indent: 2em;
-    line-height: 2;
+  .section-title {
+    font-size: 1.1rem; font-weight: 300;
+    letter-spacing: 0.05em; line-height: 1.6;
+    color: #c4c0b4; margin-bottom: 2rem;
   }
 
-  .epigraph { text-align: center; margin: 2.5rem 0; }
-  .epigraph p {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    text-indent: 0; font-size: 0.82rem; font-weight: 200; color: #8a867e; line-height: 2.2; }
-  .epigraph p:last-child {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    margin-top: 1rem; font-size: 0.65rem; color: #6b6760; }
-
-  .question {
-    margin: 2.5rem 0; padding: 2rem 0; text-align: center;
-    border-top: 1px solid #2a2825; border-bottom: 1px solid #2a2825;
+  .text {
+    font-size: 0.8rem; line-height: 2; color: #8a867e;
   }
-  .question p {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    text-indent: 0; font-size: 0.95rem; font-weight: 200;
-    color: #e8e4dc; line-height: 2.2; margin-bottom: 0;
+  .text + .text { margin-top: 1rem; }
+
+  .text--sm {
+    font-size: 0.7rem; line-height: 2; color: #6b6760;
+  }
+  .text--xs {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.45rem; letter-spacing: 0.2em;
+    color: #55524c; text-transform: uppercase;
+  }
+  .text--center { text-align: center; }
+
+  .col {
+    max-width: 560px; margin: 0 auto;
+  }
+  @media (min-width: 768px) { .col { max-width: 500px; } }
+
+  .col--wider {
+    max-width: 640px; margin: 0 auto;
+  }
+  @media (min-width: 768px) { .col--wider { max-width: 600px; } }
+
+  /* ===== EPIGRAPH ===== */
+  .epigraph { text-align: center; margin-bottom: 3rem; }
+  .epigraph .text { font-size: 0.75rem; color: #6b6760; line-height: 2.2; font-weight: 200; }
+  .epigraph .text:last-child { margin-top: 0.8rem; font-size: 0.5rem; color: #55524c; font-family: 'Inter', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.15em; }
+
+  /* ===== QUOTE ===== */
+  .quote {
+    margin: 3.5rem auto; padding: 2.5rem 0; text-align: center;
+    border-top: 0.5px solid #1e1c1a; border-bottom: 0.5px solid #1e1c1a;
+    max-width: 400px;
+  }
+  .quote .text {
+    font-size: 0.85rem; font-weight: 200; line-height: 2;
+    color: #c4c0b4; letter-spacing: 0.05em;
   }
 
-  .principle { margin: 2.5rem 0; }
+  .hr { border: none; width: 1.5rem; height: 0.5px; background: #2a2825; margin: 0 auto; }
+
+  /* ===== PRINCIPLE ===== */
+  .principle { margin: 3rem 0; }
   .principle:last-of-type { margin-bottom: 0; }
   .principle-label {
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; font-weight: 200;
-    font-size: 0.45rem; letter-spacing: 0.35em;
-    color: #55524c; margin-bottom: 0.5rem; text-transform: uppercase;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.4em;
+    color: #3a3835; text-transform: uppercase; margin-bottom: 0.5rem;
   }
   .principle h3 {
-    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'SimSun', 'Songti SC', serif;
-    font-size: 0.9rem; font-weight: 400; margin-bottom: 0.6rem;
-    letter-spacing: 0.02em; line-height: 1.6; color: #d9d6cf;
+    font-size: 0.85rem; font-weight: 350;
+    margin-bottom: 0.5rem; letter-spacing: 0.03em; color: #b5b0a6;
   }
-  .principle p {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    font-size: 0.82rem; color: #9e9a90; }
-  .aside { margin: 1rem 0 1rem 1.5rem; }
-  .aside p {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    text-indent: 0; font-size: 0.72rem; color: #6b6760; font-weight: 200; margin-bottom: 0.3rem; }
+  .principle .text { font-size: 0.75rem; }
+  .aside { margin: 0.8rem 0 0 1.5rem; }
+  .aside .text { font-size: 0.65rem; color: #55524c; font-weight: 200; }
 
-  hr { border: none; width: 1.5rem; height: 1px; background: #3a3835; margin: 0 auto; }
-
-  /* ===== IMAGE BANNER (mobile) ===== */
-  .image-banner {
-    width: 100%; height: 35vh;
+  /* ===== BANNER ===== */
+  .banner {
+    width: 100%; height: 70vh;
     background-size: cover; background-position: center;
-    filter: grayscale(1) brightness(0.35) contrast(1.05);
-    opacity: 0; transition: opacity 1s ease-out;
+    background-color: #0d0d0b;
   }
-  .image-banner.visible { opacity: 1; }
 
-  /* ===== WORKS (mobile stacked) ===== */
-  .works-grid {
-    display: flex; flex-direction: column; gap: 1rem;
-    margin: 2rem 0;
+  /* ===== WORKS ===== */
+  .works { margin: 3rem 0 0; }
+  .piece {
+    display: flex; flex-direction: column;
+    border-bottom: 0.5px solid #1a1816;
   }
-  .work-card {
-    background: #1c1b19; display: flex; flex-direction: column;
-    padding: 1.5rem; min-height: auto;
-    border: 1px solid #2a2825;
-    border-radius: 4px;
+  .piece:first-of-type { border-top: 0.5px solid #1a1816; }
+  .piece-image {
+    width: 100%;
+    background-size: contain; background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0d0d0b;
+    min-height: 70vh;
   }
-  .work-card.has-image {
-    background-size: cover; background-position: center;
-    position: relative; border: none;
-    min-height: 22rem;
-    border-radius: 4px;
+  .piece-info { padding: 2rem 1.5rem; }
+  @media (min-width: 768px) {
+    .piece {
+      flex-direction: row;
+    }
+    .piece:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .piece-image {
+      flex: 0 0 55%; min-height: 80vh;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .piece-info {
+      flex: 0 0 45%; padding: 3rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
   }
-  .work-card.has-image::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(17,17,15,0.88) 0%, rgba(17,17,15,0.2) 50%, rgba(17,17,15,0.05) 100%);
-    z-index: 1;
-    border-radius: 4px;
+
+  .piece-axis {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.35em;
+    color: #3a3835; text-transform: uppercase; margin-bottom: 0.6rem;
   }
-  .work-card.has-image .piece-axis,
-  .work-card.has-image .piece-name,
-  .work-card.has-image .piece-type,
-  .work-card.has-image .piece-text {
-    position: relative; z-index: 2;
+  .piece-name {
+    font-size: 1rem; font-weight: 300;
+    letter-spacing: 0.05em; color: #c4c0b4; margin-bottom: 0.1rem;
   }
-  .work-card .piece-axis {
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; font-weight: 200;
-    font-size: 0.45rem; letter-spacing: 0.32em;
-    color: #6b6760; text-transform: uppercase; margin-bottom: 0.8rem;
+  .piece-type {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.45rem; letter-spacing: 0.15em;
+    color: #3a3835; text-transform: uppercase; margin-bottom: 1.2rem;
   }
-  .work-card .piece-name {
-    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'SimSun', 'Songti SC', serif;
-    font-size: 1.1rem; font-weight: 400; letter-spacing: 0.06em;
-    color: #d9d6cf; margin-bottom: 0.1rem; line-height: 1.5;
+  .piece-desc {
+    font-size: 0.72rem; line-height: 2; color: #8a867e;
   }
-  .work-card .piece-type {
-    font-size: 0.55rem; font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
-    letter-spacing: 0.2em; color: #55524c; text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-  .work-card .piece-text {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    font-size: 0.82rem; line-height: 2; color: #8a867e;
-  }
-  .work-card .piece-text em {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    font-style: normal; color: #6b6760; font-size: 0.75rem;
+  .piece-desc em {
     display: block; margin-top: 0.5rem;
+    font-style: normal; color: #6b6760; font-size: 0.65rem;
   }
 
   /* ===== CONTACT ===== */
-  .contact-links {
-    display: flex; flex-direction: column; gap: 1rem;
-    margin: 2rem 0; align-items: center;
+  .name-text { margin-bottom: 1.2rem; }
+  .name-text strong { font-weight: 350; color: #b5b0a6; font-size: 0.75rem; }
+
+  .links { text-align: center; margin: 3rem 0; }
+  .links .label {
+    display: block;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.4rem; letter-spacing: 0.3em;
+    color: #3a3835; text-transform: uppercase; margin-bottom: 0.8rem;
   }
-  .contact-links a {
-    color: #6b6760; text-decoration: none;
-    font-size: 0.85rem; font-weight: 200; letter-spacing: 0.08em;
+  .links a {
+    display: inline-block; color: #6b6760; text-decoration: none;
+    font-size: 0.75rem; font-weight: 200; margin: 0 1rem;
     transition: color 0.3s;
   }
-  .contact-links a:hover { color: #e8e4dc; }
-  .contact-links .label {
-    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; font-size: 0.45rem;
-    letter-spacing: 0.3em; color: #3a3835; text-transform: uppercase;
-    margin-bottom: 0.3rem;
-  }
+  .links a:hover { color: #c4c0b4; }
 
-  .closing { text-align: center; padding: 1.5rem 0; }
-  .closing p {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    text-indent: 0; font-size: 0.82rem; color: #8a867e; }
-  .closing p:last-of-type {
-    font-family: 'LXGW WenKai', 'KaiTi', 'STKaiti', 'Noto Serif SC', serif;
-    margin-top: 0.8rem; color: #6b6760; font-size: 0.65rem; }
+  .closing { text-align: center; padding: 2rem 0; }
+  .closing .text { color: #8a867e; margin-bottom: 0.3rem; }
+  .closing .text:last-of-type { color: #6b6760; font-size: 0.65rem; margin-top: 0.8rem; }
 
   footer {
-    text-align: center; padding: 2.5rem 1.25rem 4rem;
-    font-size: 0.45rem; letter-spacing: 0.25em;
-    color: #3a3835; font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif; text-transform: uppercase;
+    text-align: center; padding: 3rem 1.5rem 4rem;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.25em;
+    color: #2a2825; text-transform: uppercase;
   }
+
+  /* GSAP initial */
+  section, .banner, .landing-marker { opacity: 0; }
 </style>
 </head>
 <body>
 
-<div class="grain"></div>
-
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">KIDNESS</a>
   <button class="nav-toggle" id="navToggle" aria-label="menu">
@@ -320,13 +283,13 @@
 
 <!-- LANDING -->
 <div class="landing">
-  <div class="landing-bg"></div>
+  <div class="landing-bg" id="landingBg"></div>
   <div class="landing-inner">
-    <div class="landing-name">KIDNESS</div>
-    <span class="landing-line zh">轻，还是重</span>
-    <span class="landing-line en">lightness or weight</span>
+    <div class="landing-name" id="landingTitle">KIDNESS</div>
+    <span class="landing-line zh" id="landingSub1">轻，还是重</span>
+    <span class="landing-line en" id="landingSub2">lightness or weight</span>
   </div>
-  <div class="landing-marker">
+  <div class="landing-marker" id="landingMarker">
     <span></span>
     <em>scroll</em>
   </div>
@@ -334,194 +297,208 @@
 
 <!-- PHILOSOPHY -->
 <section id="philosophy">
-  <div class="epigraph">
-    <p>"Einmal ist keinmal.<br>只发生一次的事，就像从未发生过。"</p>
-    <p>——米兰·昆德拉</p>
+  <div class="section">
+    <div class="col">
+      <div class="epigraph">
+        <p class="text">"Einmal ist keinmal.<br>只发生一次的事，就像从未发生过。"</p>
+        <p class="text">— 米兰·昆德拉</p>
+      </div>
+      <div class="section-tag">01</div>
+      <h2 class="section-title">轻，还是重？</h2>
+      <p class="text">这是一个问题。我们不会回答它。</p>
+      <p class="text">昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛。而鸿毛的重量是零。零无法承受。</p>
+      <p class="text">这不是一个形而上学的问题。它每天都在发生：你买一件衣服，穿两次，不想要了。你扔掉它，没有感觉。这是轻。但这轻让你不安。</p>
+      <p class="text">你有一件外套，穿了好几年。袖口磨薄，扣子换过一次。有一天它终于不能穿了。你有一种奇怪的感觉——不是失去了一件物品，是失去了一段时间容器。这是重。</p>
+      <p class="text">KIDNESS 不告诉你应该选轻还是选重。我们只是指出：你在选择。</p>
+    </div>
+    <div class="quote">
+      <p class="text">如果一件衣服<br>只是被穿过一次就消失了<br>它真的存在过吗？</p>
+    </div>
+    <div class="col">
+      <p class="text">人的生命只有一次——这是它最轻的地方，也是它最重的地方。轻和重是互斥的。你只能选一个方向。或者，在两者之间——不安地、诚实地——来回摇摆。</p>
+      <p class="text">KIDNESS 不提供解决方案。我们只是一个坐标。</p>
+    </div>
   </div>
-
-  <div class="section-label">01</div>
-  <h2>轻，还是重？</h2>
-  <p>这是一个问题。我们不会回答它。</p>
-  <p>昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛。而鸿毛的重量是零。零是无法承受的。</p>
-  <p>这不是一个形而上学的问题。它每天都在发生：你买一件衣服，穿了两次，不想要了。你扔掉它，没有感觉。这是轻。但这轻让你不安。</p>
-  <p>你有一件外套，穿了好几年。袖口磨薄了，扣子换过一次。有一天它终于不能穿了。你有一种奇怪的感觉——不是失去了一件物品，是失去了一段时间的容器。这是重。</p>
-  <p>KIDNESS 不告诉你应该选轻还是选重。我们只是指出：你在选择。每一次购买、每一次穿着、每一次丢弃，你都在选择。</p>
-
-  <div class="question">
-    <p>如果一件衣服<br>只是被穿过一次就消失了<br>它真的存在过吗？</p>
-  </div>
-
-  <p>人的生命只有一次——这是它最轻的地方，也是它最重的地方。人与物的关系同样如此。轻和重是互斥的。你只能选一个方向。或者，在两者之间——不安地、诚实地——来回摇摆。</p>
-  <p>KIDNESS 不提供解决方案。我们只是一个坐标。</p>
 </section>
 
-<hr>
+<hr class="hr">
 
-<!-- PRINCIPLES -->
 <section id="principles">
-  <div class="section-label">02 / 原则</div>
-  <h2>几个还不完整的假设</h2>
-  <p>以下不是宣言。宣言是一种过于重的形式。它们只是一些暂时的、可被推翻的假设。</p>
+  <div class="section section--slim">
+    <div class="col">
+      <div class="section-tag">02 / 原则</div>
+      <h2 class="section-title">几个还不完整的假设</h2>
+      <p class="text text--sm">以下不是宣言。宣言是一种过于重的形式。</p>
 
-  <div class="principle">
-    <div class="principle-label">关于轻</div>
-    <h3>一：衣服不该是负担</h3>
-    <p>它不应束缚你的动作，不应强迫你扮演某种角色。极简、留白、沉默——这些不是美学选择，是伦理选择。</p>
-    <div class="aside"><p>（但"不是负担"不等于"没有重量"。——这是两回事。）</p></div>
-  </div>
+      <div class="principle">
+        <div class="principle-label">关于轻</div>
+        <h3>一：衣服不该是负担</h3>
+        <p class="text">它不应束缚你的动作，不应强迫你扮演某种角色。极简、留白、沉默——这些不是美学选择，是伦理选择。</p>
+        <div class="aside"><p class="text">（但"不是负担"不等于"没有重量"。）</p></div>
+      </div>
 
-  <div class="principle">
-    <div class="principle-label">关于重</div>
-    <h3>二：衣服应该承受时间</h3>
-    <p>面料随着穿着而变化，颜色随着水洗而褪变，边缘随着摩擦而磨损。这不是质量的缺陷，这是质量的证据。一件不会变旧的衣服，也不会变老——它只是突然坏掉。</p>
-    <div class="aside"><p>（但"承受时间"不等于"沉重"。——这是另一个区别。）</p></div>
-  </div>
+      <div class="principle">
+        <div class="principle-label">关于重</div>
+        <h3>二：衣服应该承受时间</h3>
+        <p class="text">面料随穿着而变化，颜色随水洗而褪变，边缘随摩擦而磨损。这不是质量的缺陷，是质量的证据。一件不会变旧的衣服，也不会变老——它只是突然坏掉。</p>
+        <div class="aside"><p class="text">（但"承受时间"不等于"沉重"。）</p></div>
+      </div>
 
-  <div class="principle">
-    <div class="principle-label">关于之间</div>
-    <h3>三：衣服和人的关系是对等的</h3>
-    <p>你改变衣服，衣服也改变你。这不是一种占有关系——占有是单向的。这是一种互相定义的关系。</p>
+      <div class="principle">
+        <div class="principle-label">关于之间</div>
+        <h3>三：衣服和人的关系是对等的</h3>
+        <p class="text">你改变衣服，衣服也改变你。这不是一种占有关系——占有是单向的。这是一种互相定义的关系。</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<div class="image-banner" data-src="kidness_images/bg_banner1.png" style="height:30vh;"></div>
+<div class="banner" style="background-image:url('kidness_images/bg_banner1.png');"></div>
 
-<!-- WORKS -->
 <section id="works">
-  <div class="section-label">03 / 作品</div>
-  <h2>第一季：轻重之间</h2>
-  <p>四件单品。三组关系——轻／重／之间。一个还没开始讲的故事。</p>
+  <div class="section">
+    <div class="col--wider">
+      <div class="section-tag">03 / 作品</div>
+      <h2 class="section-title">第一季：轻重之间</h2>
+      <p class="text text--sm">四件单品。三组关系。一个还没开始的故事。</p>
+    </div>
+  </div>
 
-  <div class="works-grid">
-    <div class="work-card has-image" style="background-image:url('kidness_images/01_jingshui_coat.png');">
-      <div class="piece-axis">重的一端</div>
-      <div class="piece-name">静水</div>
-      <div class="piece-type">大衣 · Overcoat</div>
-      <div class="piece-text">
-        及踝超长。A 字立柱剪裁——<br>
-        廓形从髋部以下才缓慢散开，往上是一道干净的垂直线。<br>
-        小立领。顶端一粒暗扣。不对称双排斜门襟，哑光贝壳扣。<br>
-        袖口翻折，露出撞色白里。<br>
-        <em>水洗棉麻。哑光黑。皱，但不塌。</em>
+  <div class="works">
+    <div class="piece">
+      <div class="piece-image" style="background-image:url('kidness_images/01_jingshui_coat.png');"></div>
+      <div class="piece-info">
+        <div class="piece-axis">重的一端</div>
+        <div class="piece-name">静水</div>
+        <div class="piece-type">大衣 · Overcoat</div>
+        <div class="piece-desc">
+          及踝超长，A 字立柱剪裁。廓形从髋部以下才缓慢散开。<br>
+          小立领顶端一粒暗扣。不对称双排斜门襟配哑光贝壳扣。<br>
+          翻折袖口露出撞色白里。<br>
+          <em>水洗棉麻。哑光黑。皱，但不塌。</em>
+        </div>
       </div>
     </div>
 
-    <div class="work-card has-image" style="background-image:url('kidness_images/02_daoying_shirt.png');">
-      <div class="piece-axis">轻的一端</div>
-      <div class="piece-name">倒影</div>
-      <div class="piece-type">衬衫 · Shirt</div>
-      <div class="piece-text">
-        你触碰不到它，但它证明你在那里。<br>
-        宽松剪裁。不下摆。不束腰。<br>
-        面料极薄但有骨感——会皱，会透，会随呼吸起伏。<br>
-        <em>它不命令你挺直腰杆。</em>
+    <div class="piece">
+      <div class="piece-image" style="background-image:url('kidness_images/02_daoying_shirt.png');"></div>
+      <div class="piece-info">
+        <div class="piece-axis">轻的一端</div>
+        <div class="piece-name">倒影</div>
+        <div class="piece-type">衬衫 · Shirt</div>
+        <div class="piece-desc">
+          你触碰不到它，但它证明你在那里。<br>
+          宽松剪裁，不下摆，不束腰。<br>
+          面料极薄但有骨感——会皱，会透，随呼吸起伏。<br>
+          <em>它不命令你挺直腰杆。</em>
+        </div>
       </div>
     </div>
 
-    <div class="work-card has-image" style="background-image:url('kidness_images/03_rock_pants.png');">
-      <div class="piece-axis">之间</div>
-      <div class="piece-name">岩石</div>
-      <div class="piece-type">裤 · Trousers</div>
-      <div class="piece-text">
-        岩石在水与岸之间。水打磨它，它改变水的流向。<br>
-        直筒微阔。裆部有呼吸的空间。<br>
-        重克重面料，但剪裁让重量感消失。<br>
-        <em>膝盖处预设微褶——为了承认你确实会弯下膝盖。</em>
+    <div class="piece">
+      <div class="piece-image" style="background-image:url('kidness_images/03_rock_pants.png');"></div>
+      <div class="piece-info">
+        <div class="piece-axis">之间</div>
+        <div class="piece-name">岩石</div>
+        <div class="piece-type">裤 · Trousers</div>
+        <div class="piece-desc">
+          岩石在水与岸之间——水打磨它，它改变水的流向。<br>
+          弯刀廓形，大腿饱满至膝部收窄。<br>
+          黑色光滑羊毛，九分裤长，笔直中线。<br>
+          脚口翻边，露出米白色棉麻里布。黑与米之间。<br>
+        </div>
       </div>
     </div>
 
-    <div class="work-card has-image" style="background-image:url('kidness_images/04_first_chapter.png');">
-      <div class="piece-axis">入口</div>
-      <div class="piece-name">第一篇章</div>
-      <div class="piece-type">系列 · Chapter One</div>
-      <div class="piece-text">
-        这不是系列名。这是一个开始，也是一个问题。<br><br>
-        如果你可以重新选择<br>
-        你穿的第一件衣服——<br>
-        你会选择什么？<br>
-        <em>这一季是这个问题的四次尝试。</em>
+    <div class="piece">
+      <div class="piece-image" style="background-image:url('kidness_images/04_first_chapter.png');"></div>
+      <div class="piece-info">
+        <div class="piece-axis">入口</div>
+        <div class="piece-name">第一篇章</div>
+        <div class="piece-type">系列 · Chapter One</div>
+        <div class="piece-desc">
+          这不是系列名。这是一个开始，也是一个问题。<br><br>
+          如果你可以重新选择你穿的第一件衣服——<br>
+          你会选择什么？<br>
+          <em>这一季是这个问题的四次尝试。</em>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="question">
-    <p>你能承受<br>一件衣服的重量吗？</p>
+  <div class="section">
+    <div class="col--wider">
+      <div class="quote">
+        <p class="text">你能承受<br>一件衣服的重量吗？</p>
+      </div>
+      <p class="text text--sm">"重量"不是指克重。是指意义。</p>
+      <p class="text text--sm">KIDNESS 不做承诺。我们只提出这个矛盾，然后把它留给你。</p>
+    </div>
   </div>
-
-  <p>"重量"不是指克重。是指意义。承诺是重的——但零承诺的生活，是不是也是一种不能承受的轻？</p>
-  <p>KIDNESS 不做承诺。我们只提出这个矛盾，然后把它留给你。</p>
 </section>
 
-<div class="image-banner" data-src="kidness_images/bg_banner2.png" style="height:25vh;"></div>
+<div class="banner" style="background-image:url('kidness_images/bg_banner2.png');"></div>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="section-label">04 / 名字</div>
-  <p><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
-  <p><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
-  <p><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。</p>
+  <div class="section section--slim">
+    <div class="col">
+      <div class="section-tag">04 / 名字</div>
 
-  <hr style="margin:2rem auto;">
+      <p class="text name-text"><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
+      <p class="text name-text"><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
+      <p class="text name-text"><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。</p>
 
-  <div class="section-label">联系</div>
-  <div class="contact-links">
-    <span class="label">社交媒体</span>
-    <a href="#">Instagram — 即将到来</a>
-    <a href="#">小红书 — 即将到来</a>
-    <a href="#">微博 — 即将到来</a>
-  </div>
+      <hr class="hr" style="margin:2.5rem auto;">
 
-  <div class="closing">
-    <p>这不是品牌宣言。</p>
-    <p>这是一个问题的草稿。</p>
-    <p>问题没有结论。<br>结论是留给那些不再问问题的人的。</p>
+      <div class="section-tag" style="margin-top:2rem;">联系</div>
+      <div class="links">
+        <span class="label">社交媒体</span>
+        <a href="#">Instagram</a>
+        <a href="#">小红书</a>
+        <a href="#">微博</a>
+      </div>
+
+      <div class="closing">
+        <p class="text">这不是品牌宣言。</p>
+        <p class="text">这是一个问题的草稿。</p>
+        <p class="text text--sm">问题没有结论。结论是留给那些不再问问题的人的。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>KIDNESS — a question, not an answer</footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
 <script>
-// === Nav toggle
-const toggle = document.getElementById('navToggle');
-const overlay = document.getElementById('navOverlay');
-toggle.addEventListener('click', () => {
-  toggle.classList.toggle('active');
-  overlay.classList.toggle('open');
-});
+gsap.registerPlugin(ScrollTrigger);
+
+const toggle = document.getElementById('navToggle'), overlay = document.getElementById('navOverlay');
+toggle.addEventListener('click', () => { toggle.classList.toggle('active'); overlay.classList.toggle('open'); });
 overlay.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    overlay.classList.remove('open');
-    toggle.classList.remove('active');
-    const target = document.getElementById(link.dataset.target);
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  link.addEventListener('click', e => {
+    e.preventDefault(); overlay.classList.remove('open'); toggle.classList.remove('active');
+    const t = document.getElementById(link.dataset.target);
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
-// === Intersection Observer
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('section, .image-banner').forEach(el => observer.observe(el));
+gsap.fromTo('#landingTitle', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 2, delay: .3, ease: 'power4.out' });
+gsap.fromTo('#landingSub1', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 1.4, ease: 'power3.out' });
+gsap.fromTo('#landingSub2', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 1.8, ease: 'power3.out' });
+gsap.to('#landingMarker', { opacity: 1, duration: 1, delay: 2.8 });
+gsap.to('#landingBg', { y: '8%', ease: 'none', scrollTrigger: { trigger: '.landing', start: 'top top', end: 'bottom top', scrub: 1.5 } });
 
-// === Lazy load images
-const imgObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const url = entry.target.dataset.src;
-      if (url) {
-        const img = new Image();
-        img.onload = () => { entry.target.style.backgroundImage = `url('${url}')`; entry.target.classList.add('visible'); };
-        img.onerror = () => { entry.target.classList.add('visible'); };
-        img.src = url;
-      }
-    }
-    imgObserver.unobserve(entry.target);
-  });
-}, { threshold: 0.05 });
-document.querySelectorAll('.image-banner').forEach(b => imgObserver.observe(b));
+gsap.utils.toArray('section, .banner').forEach(el => {
+  gsap.fromTo(el, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+});
+
+gsap.utils.toArray('.principle').forEach((el, i) => {
+  gsap.fromTo(el, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: .7, delay: i * .1, ease: 'power2.out', scrollTrigger: { trigger: '#principles', start: 'top 80%', toggleActions: 'play none none none' } });
+});
+
+gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '#works', start: 'top 82%', toggleActions: 'play none none none' } });
 </script>
 
 </body>

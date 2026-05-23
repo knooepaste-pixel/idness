@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIDNESS — 轻与重</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500&family=Inter:wght@100;200;300;400;500&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #f8f7f5;
+    color: #1a1a1a;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    line-height: 2.1;
+    letter-spacing: 0.04em;
+  }
+
+  /* ====== LANDING ====== */
+  .landing {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+    color: #f8f7f5;
+    text-align: center;
+  }
+  .landing-name {
+    font-size: clamp(3rem, 12vw, 10rem);
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.3em;
+    line-height: 1;
+  }
+  .landing-line {
+    font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+    font-weight: 200;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+  }
+  .landing-line:last-child {
+    opacity: 0.2;
+    font-size: clamp(0.55rem, 0.9vw, 0.7rem);
+    margin-top: 0.5rem;
+  }
+
+  section {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  @media (max-width:600px) { section { padding: 3rem 1.5rem; } }
+
+  .section-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: #bbb;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width:600px) { h2 { font-size: 1.15rem; } }
+
+  p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-indent: 2em;
+  }
+
+  .sep {
+    width: 24px; height: 1px;
+    background: #ddd;
+    margin: 2rem auto;
+  }
+
+  /* epigraph / block quote */
+  .epigraph {
+    font-size: 0.85rem;
+    font-weight: 200;
+    text-align: center;
+    color: #aaa;
+    line-height: 2.2;
+    margin: 3rem 0;
+    text-indent: 0;
+  }
+  .epigraph em { font-style: normal; color: #888; }
+
+  /* fragment — like a frayed thought */
+  .fragment {
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .fragment p {
+    text-indent: 0;
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 2;
+  }
+
+  /* principle */
+  .axiom {
+    margin: 3.5rem 0;
+  }
+  .axiom-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: #ccc;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+  }
+  .axiom-title {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .axiom p {
+    font-size: 0.88rem;
+    color: #444;
+  }
+
+  /* question — the core device */
+  .question {
+    border: none;
+    margin: 3rem 0;
+    padding: 2rem 0;
+    text-align: center;
+  }
+  .question p {
+    text-indent: 0;
+    font-size: 1.05rem;
+    font-weight: 200;
+    color: #1a1a1a;
+    line-height: 2.2;
+  }
+
+  .divider {
+    margin: 4rem 0;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #ddd;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.3em;
+  }
+
+  .closing {
+    text-align: center;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .closing p {
+    text-indent: 0;
+    font-size: 0.85rem;
+    color: #999;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.6rem;
+    color: #ddd;
+    letter-spacing: 0.2em;
+    font-family: 'Inter', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<div class="landing">
+  <div class="landing-name">KIDNESS</div>
+  <div class="landing-line">轻，还是重</div>
+  <div class="landing-line">a question. not an answer.</div>
+</div>
+
+<!-- 00 -->
+<section>
+  <div class="epigraph">
+    "Einmal ist keinmal.<br>
+    只发生一次的事，就像从未发生过。"<br>
+    <em>——米兰·昆德拉</em>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 01 -->
+<section>
+  <div class="section-num">01</div>
+  <h2>轻，还是重？</h2>
+  <p>这是一个问题。我们不会回答它。</p>
+  <p>昆德拉问过。尼采也问过——如果一切将永恒重复，那么每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛，而鸿毛的重量是零。零是无法承受的。</p>
+  <p>这不是一个形而上学的问题。它每天都在发生：</p>
+  <p>你买一件衣服，穿了两次，不喜欢了。你扔掉它，没有感觉。这是轻。——但这轻让你不安，你知道某些东西正在流失，只是你无法命名它。</p>
+  <p>你有一件外套，穿了好几年。袖口磨薄了，扣子换过一次，颜色褪到了某个刚好合适的程度。你穿着它去面试、去见朋友、去度过那些说不上好坏的日子。有一天它终于不能穿了。你有一种奇怪的感觉——不是失去了一件物品，是失去了一段时间的容器。这是重。</p>
+  <p>KIDNESS 不告诉你应该选轻还是选重。我们只是指出：你在选择。每一次购买、每一次穿着、每一次丢弃，你都在选择。大多数时候你甚至没有意识到自己在选择——这就是轻的诱惑：不用面对选择，也就不必承受选择的后果。</p>
+  <p>但我们怀疑，轻是否真的让人自由。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- 02 -->
+<section>
+  <div class="section-num">02</div>
+  <h2></h2>
+  <div class="question">
+    <p>如果一件衣服<br>只是被穿过一次就消失了<br>它真的存在过吗？</p>
+  </div>
+
+  <p>这是一个无法用物理回答的问题。物理上说它存在过：它被生产、被运输、被购买、被穿着——最后被丢弃。但存在过和留下痕迹不是一回事。</p>
+  <p>在昆德拉的叙述里，托马斯不断地面临同一个选择：轻（自由、不被定义、不承担责任的流浪）还是重（特蕾莎、承诺、躺在一个女人身边醒来的清晨）。他没有选。他一直在两者之间游荡。这不是软弱——这是诚实：承认没有一个选择是完美无缺的。</p>
+  <p>人与物的关系同样如此。你不能既要一件衣服完全属于你、记录你的时间，又要它永远崭新、随时可以丢弃。轻和重是互斥的。你只能选一个方向。或者，像托马斯一样，在两者之间——不安地、诚实地——来回摇摆。</p>
+  <p>KIDNESS 不提供解决方案。我们只是提供一个坐标：这是轻的方向，这是重的方向。你的位置，你自己决定。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- 03 PRINCIPLES -->
+<section>
+  <div class="section-num">03 / 原则</div>
+  <h2>几个还不完整的假设</h2>
+  <p>以下不是宣言。宣言是一种过于重的形式。它们只是一些暂时的、可被推翻的假设。</p>
+
+  <div class="axiom">
+    <div class="axiom-label">关于轻</div>
+    <div class="axiom-title">原则一：衣服不该是负担</div>
+    <p>它不应束缚你的动作，不应强迫你扮演某种角色，不应在你穿上它的那一刻就告诉你"你应该成为什么样的人"。极简、留白、沉默——这些不是美学选择，是伦理选择。</p>
+  </div>
+
+  <div class="fragment">
+    <p>（但"不是负担"不等于"没有重量"——这是两回事。）</p>
+  </div>
+
+  <div class="axiom">
+    <div class="axiom-label">关于重</div>
+    <div class="axiom-title">原则二：衣服应该承受时间</div>
+    <p>面料应该随着穿着而变化。颜色应该随着水洗而褪变。边缘应该随着摩擦而磨损。这不是质量的缺陷，这是质量的证据。一件不会变旧的衣服，也不会变老——它只是突然坏掉。而一件会慢慢变旧的衣服，在你穿它的每一天里都在和你对话。</p>
+  </div>
+
+  <div class="fragment">
+    <p>（但"承受时间"不等于"沉重"——这是另一个区别。）</p>
+  </div>
+
+  <div class="axiom">
+    <div class="axiom-label">关于之间</div>
+    <div class="axiom-title">原则三：衣服和人的关系是对等的</div>
+    <p>你改变衣服，衣服也改变你。你穿着它，你的动作在它上面留下痕迹；它在你身上，它的剪裁在无声地影响你的姿态、你的步幅、你自信或不自信的方式。这不是一种占有关系——占有是单向的。这是一种互相定义的关系。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 04 -->
+<section>
+  <div class="section-num">04</div>
+  <h2></h2>
+  <div class="question">
+    <p>你能承受<br>一件衣服的重量吗？</p>
+  </div>
+
+  <p>"重量"不是指克重。是指意义。</p>
+  <p>当你穿上一件标注着"常年穿着"的外套，你同时也穿上了某种责任感。你承诺了时间。你不确定自己是否能遵守这个承诺——六个月后你还喜欢它吗？一年后它还合身吗？你的生活还会是现在这个样子吗？</p>
+  <p>承诺是重的。这就是为什么大多数人选择轻——快时尚的意义不在于价格低廉，而在于零承诺。你不必对一件 99 块钱的衣服负责。穿坏了扔掉，没有任何心理负担。</p>
+  <p>但问题是：零承诺的生活，是不是也是一种不能承受的轻？</p>
+  <p>KIDNESS 不做承诺。我们只提出这个矛盾，然后把它留给你。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- 05 NAME -->
+<section>
+  <div class="section-num">05 / 关于名字</div>
+  <h2></h2>
+  <p>KIDNESS 是一个拼凑出来的词。它有三个来源：</p>
+
+  <p><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
+
+  <p><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
+
+  <p><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。Kindness 不是一个答案，它是一个姿态：我愿意在这个问题上与你站在一起。</p>
+
+  <div class="fragment">
+    <p>KIDNESS 是三个词的交集。<br>
+    而这个交集是一个问题。</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 06 -->
+<section>
+  <div class="section-num">06 / 一点补充</div>
+  <h2></h2>
+  <p>KIDNESS 不是一个让人感到温暖的品牌。温暖是轻的，它很快会过去。我们更希望你在穿上它的时候，感受到一种冷静的确信——不是"我喜欢这件衣服"的兴奋，而是"这件衣服和我有关系"的平静。</p>
+  <p>后者更重。也更有可能是真的。</p>
+</section>
+
+<div class="divider">· · ·</div>
+
+<section>
+  <div class="closing">
+    <p>这不是品牌宣言。</p>
+    <p style="margin-top:0.5rem;">这是一个问题的草稿。</p>
+    <p style="margin-top:2rem; color:#ccc;">问题没有结论。<br>结论是留给那些不再问问题的人的。</p>
+  </div>
+</section>
+
+<footer>KIDNESS — a question. not an answer.</footer>
+
+</body>
+</html>

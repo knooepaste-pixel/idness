@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIDNESS — 轻与重之间</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;700&family=Inter:wght@100;200;300;400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f5f4f2;
+    color: #1a1a1a;
+    font-family: 'Noto Serif SC', 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 2;
+    letter-spacing: 0.04em;
+  }
+
+  .landing {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+    color: #f5f4f2;
+    text-align: center;
+    position: relative;
+  }
+  .landing-name {
+    font-size: clamp(3rem, 12vw, 10rem);
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.2em;
+  }
+  .landing-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    font-weight: 200;
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+  .landing-sub {
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    opacity: 0.3;
+    margin-top: 1.5rem;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+  }
+  .landing-scroll {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    opacity: 0.25;
+    animation: fade 2s infinite;
+    font-family: 'Inter', sans-serif;
+  }
+  @keyframes fade { 0%,100%{opacity:0.25} 50%{opacity:0.08} }
+
+  section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  @media (max-width: 600px) {
+    section { padding: 3rem 1.5rem; }
+  }
+
+  .section-num {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: #bbb;
+    margin-bottom: 1rem;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    letter-spacing: 0.06em;
+  }
+  @media (max-width: 600px) {
+    h2 { font-size: 1.3rem; }
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-indent: 2em;
+  }
+
+  .sep {
+    width: 30px; height: 1px;
+    background: #ccc;
+    margin: 2.5rem auto;
+  }
+
+  .epigraph {
+    font-size: 0.9rem;
+    font-weight: 200;
+    text-align: center;
+    color: #999;
+    margin: 3rem 0;
+    line-height: 2.2;
+    letter-spacing: 0.06em;
+    text-indent: 0;
+  }
+  .epigraph em {
+    font-style: normal;
+    color: #666;
+  }
+
+  .manifesto {
+    margin: 2.5rem 0;
+    padding: 0 1rem;
+    font-size: 1.05rem;
+    line-height: 2.2;
+  }
+  .manifesto p {
+    text-indent: 0;
+    margin-bottom: 0.8rem;
+    color: #1a1a1a;
+  }
+
+  .principle {
+    margin: 2.5rem 0;
+  }
+  .principle-num {
+    font-size: 0.65rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.15em;
+    color: #bbb;
+    margin-bottom: 0.4rem;
+  }
+  .principle-title {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+  }
+  .principle p {
+    font-size: 0.95rem;
+  }
+
+  .heavy-words {
+    border-left: 2px solid #1a1a1a;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+  }
+  .heavy-words p {
+    text-indent: 0;
+    font-size: 0.92rem;
+    color: #555;
+  }
+
+  .quote-block {
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 1.15rem;
+    font-weight: 200;
+    line-height: 2.2;
+    color: #666;
+    letter-spacing: 0.06em;
+  }
+  .quote-block em {
+    font-style: normal;
+    color: #1a1a1a;
+  }
+
+  .closing {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .closing p {
+    text-indent: 0;
+    font-size: 0.9rem;
+    color: #999;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.7rem;
+    color: #ccc;
+    letter-spacing: 0.15em;
+    font-family: 'Inter', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LANDING ============ -->
+<div class="landing">
+  <div class="landing-name">KIDNESS</div>
+  <div class="landing-tagline">轻与重之间</div>
+  <div class="landing-sub">in the space between lightness and weight</div>
+  <div class="landing-scroll">— scroll —</div>
+</div>
+
+<!-- ============ 00 EPIGRAPH ============ -->
+<section>
+  <div class="epigraph">
+    "最沉重的负担压迫我们，让我们屈服于它，把我们压到地上。<br>
+    但在历代的爱情诗中，女人总渴望承受一个男性身体的重量。<br>
+    于是，最沉重的负担同时也成了最强盛的生命力的影像。<br>
+    负担越重，我们的生命越贴近大地，它就越真切实在。<br><br>
+    ——米兰·昆德拉《不能承受的生命之轻》"
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 01 ============ -->
+<section>
+  <div class="section-num">01</div>
+  <h2>轻，还是重？</h2>
+
+  <p>昆德拉问了一个无法逃开的问题：如果生命只发生一次，那么它从未发生过——就像从未存在过一样。没有重复、没有比较、没有评判，一切皆是转瞬即逝的轻。而正是这轻，让人无法承受。</p>
+
+  <p>轻，是自由——但也是虚无。你可以做任何选择，不计后果；但正因不计后果，选择本身也失去了重量。</p>
+
+  <p>重，是负担——但也是意义。你为一件事、一个人、一件物品负责；正因为你要承担后果，你的每一步才具有重量。</p>
+
+  <p>KIDNESS 诞生于这个问题。不是要回答它——因为我们没有答案——而是要为那些同样被困在这个问题里的人，提供一件可以握住的东西。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 02 ============ -->
+<section>
+  <div class="section-num">02</div>
+  <h2>人与物的关系<br>是轻与重最诚实的隐喻</h2>
+
+  <p>快时尚是轻的。你花 99 块钱买一件T恤，穿三次，丢掉，没有任何感觉。它从未进入你的生活，也从未留下痕迹。正如昆德拉所说：只发生一次的事，就像从未发生过。</p>
+
+  <p>而一件你穿了三年的外套是重的。领口磨出了丝，袖口有褪色的痕迹，右边口袋因为长期放手机被撑得微微变形。你记得什么时候买了它、穿着它去过哪里、和谁见过面。每一个痕迹都对应一段记忆。</p>
+
+  <p>这不是对物的执着。这是一种让生命变"重"的方式——你选择让某些物进入你的生活，让它参与你的时间，让它见证你的变化。这不是消费，这是记录。</p>
+
+  <p>你之前说：<em>"衣服应该契合人，每个人穿着习惯不同、身材不同，最后每一件都是独一无二的。"</em> 这话的本质其实就是——你选择让衣服承受你生命的重量。当一件衣服从"买来的东西"变成"陪伴我走过这段时间的东西"，它就不再是轻的了。它有了重量。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 03 ============ -->
+<section>
+  <div class="section-num">03</div>
+  <h2>KIDNESS 的立场</h2>
+
+  <div class="manifesto">
+    <p>我们不回避重。<br>
+    我们不假装轻。<br>
+    我们选择在两者之间站着。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">关于轻 / lightness</div>
+    <div class="principle-title">衣服应该自由——不束缚你的身体，不定义你的身份，不胁迫你成为某种人</div>
+    <p>所以我们做极简的廓形、留白的细节、克制的设计。一件 KIDNESS 的衣服不会在你身上大喊大叫。它安静到可以忽略——但你脱下它的时候，会感觉到不一样。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">关于重 / weight</div>
+    <div class="principle-title">衣服应该厚重——承受你的时间，记录你的生活，陪伴你走一段路</div>
+    <p>所以我们做重磅的面料、做植物染色（会随时间变化的面料）、不做防旧处理。你穿着它的时候，你正在改变它。它在替你承受重量——而你也在给它重量。最后它不再只是一件衣服，它是你在某一阶段的生活切片。</p>
+  </div>
+
+  <div class="heavy-words">
+    <p>轻，是穿一件衣服，随时可以丢弃而无所谓。</p>
+    <p>重，是穿一件衣服，穿着穿着，它成了你的一部分。</p>
+    <p>KIDNESS 选择后者。</p>
+  </div>
+
+  <p>这不意味着沉重——把一件好衣服穿在身上的感觉，不是负担，是踏实。你知道这件衣服不会让你失望，不会一季就变形，不会因为洗了几次就失去质感。它是一种温和的重量，刚刚好让你觉得"我在这里"。而不像那些太轻的东西，穿着穿着就感觉自己飘走了。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 04 ============ -->
+<section>
+  <div class="section-num">04</div>
+  <h2>名字的轻与重</h2>
+
+  <p><strong>Kid</strong> — <em>轻。</em> 少年气、未完成、流动的、不被定义的。是托马斯面对特蕾莎时那种"不知从何而来"的冲动——纯粹、不计后果。像一件新衣服刚上身的那一刻，还没有任何记忆，一切皆有可能。</p>
+
+  <p><strong>Darkness</strong> — <em>重。</em> 深度、沉默、时间、不可回避的重量。是特蕾莎走进托马斯生活后，那种慢慢的、无可逃脱的相互定义。像一件穿过三年的衣服，上面布满了只有你知道的痕迹。</p>
+
+  <p><strong>Kindness</strong> — <em>两者之间的连接。</em> 善意不是甜腻的，不是老好人的。善意是我理解你的轻，也理解你的重，我不评价，我接纳。像一件衣服对身体的态度——不束缚、不纵容、刚好接住你。</p>
+
+  <div class="quote-block">
+    在成为大人之前，<br>
+    在彻底变轻之前，<br>
+    在被迫扛起一切之前——<br><br>
+    <em>我们选择了站在中间。</em>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 05 ============ -->
+<section>
+  <div class="section-num">05</div>
+  <h2>为那些在轻与重之间徘徊的人</h2>
+
+  <p>18 岁到 30 岁。大学到初入职场。这是一个人从"轻"走向"重"的阶段——开始为自己做选择，开始为选择负责。第一次意识到没有正确答案，第一次发现自由也可能是一种负担。</p>
+
+  <p>这个阶段的人需要的不是更多的选择——快时尚已经给了他们太多太轻的选择。他们需要的是几件有重量的东西，能抓住、能依赖、能在不安定的时候提供一点稳定感。</p>
+
+  <p>昆德拉说：<em>"爱情不是两个人互相凝视，而是一起朝着同一个方向看。"</em> 人与物的关系也可以这样理解——不是占有，不是消费，而是一起朝着同一个方向走一段路。</p>
+
+  <p>KIDNESS 想陪那些人走这一段路。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 06 ============ -->
+<section>
+  <div class="section-num">06</div>
+  <h2>第一章 · 不能承受的生命之轻</h2>
+
+  <p><em>"Einmal ist keinmal."</em> 一次就是从未发生过。</p>
+
+  <p>我们的一章不是按照季节命名的，因为季节太轻了，每年都会轮回。我们以问题命名——因为问题不会因为季节更替而消失。</p>
+
+  <p>第一章叫「不能承受的生命之轻」。</p>
+
+  <div class="principle">
+    <div class="principle-num">001</div>
+    <div class="principle-title">静水 · 大衣</div>
+    <p>重。重磅棉麻，自然垂落。衣领处留一条手缝线——你可以保留它（重，接受不完美），也可以拆掉它（轻，追求完整）。由你决定。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">002</div>
+    <div class="principle-title">倒影 · 衬衫</div>
+    <p>轻。植物染色，未经固色处理。每一次水洗都在改变它的颜色——你无法控制它变成什么样子，正如你无法控制生活会把你带向哪里。接受变化，就是接受轻。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">003</div>
+    <div class="principle-title">岩石 · 裤</div>
+    <p>重。廓形坚挺，口袋位置前后错位。穿久了，裤子的折痕会被你的身体"定型"——你给了它重量，它也承受了你的重量。</p>
+  </div>
+
+  <p>三件单品。每一件都是一个关于轻与重的问题，而不是一个答案。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ CLOSE ============ -->
+<section>
+  <div class="closing">
+    <p>KIDNESS 不是品牌，是一个问题。</p>
+    <p style="margin-top:1rem; color:#bbb;">你选择轻，还是重？<br>
+    或者说——你选择站在哪里？</p>
+    <div style="margin-top:3rem; font-size:0.7rem; letter-spacing:0.2em; color:#ccc; font-family:'Inter',sans-serif;">
+      KIDNESS / 第一章 · 不能承受的生命之轻
+    </div>
+  </div>
+</section>
+
+<footer>
+  "Einmal ist keinmal." — Milan Kundera
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIDNESS — 在成为大人之前</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;700&family=Inter:wght@100;200;300;400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f5f4f2;
+    color: #1a1a1a;
+    font-family: 'Noto Serif SC', 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== LANDING ===== */
+  .landing {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+    color: #f5f4f2;
+    text-align: center;
+    position: relative;
+  }
+  .landing-name {
+    font-size: clamp(3rem, 12vw, 10rem);
+    font-weight: 200;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.2em;
+  }
+  .landing-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    font-weight: 200;
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+  .landing-scroll {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    opacity: 0.3;
+    animation: fade 2s infinite;
+  }
+  @keyframes fade { 0%,100%{opacity:0.3} 50%{opacity:0.1} }
+
+  /* ===== SECTIONS ===== */
+  section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 1.5rem; }
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 1.5rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+  @media (max-width: 600px) {
+    h2 { font-size: 1.4rem; }
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 1.6rem;
+    color: #333;
+    text-indent: 2em;
+  }
+
+  /* ===== SEPARATOR ===== */
+  .sep {
+    width: 40px; height: 1px;
+    background: #1a1a1a;
+    margin: 3rem auto;
+    opacity: 0.3;
+  }
+
+  /* ===== MANIFESTO ===== */
+  .manifesto {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 2.2;
+    text-indent: 0;
+    border-left: 2px solid #1a1a1a;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: #1a1a1a;
+  }
+  .manifesto p { text-indent: 0; }
+
+  /* ===== PRINCIPLES ===== */
+  .principle {
+    margin: 3rem 0;
+  }
+  .principle-num {
+    font-size: 0.7rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 0.5rem;
+  }
+  .principle-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ===== QUOTE ===== */
+  .quote {
+    text-align: center;
+    padding: 4rem 1rem;
+    font-size: 1.3rem;
+    font-weight: 200;
+    line-height: 2;
+    color: #666;
+  }
+  .quote em { font-style: normal; color: #1a1a1a; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    font-size: 0.75rem;
+    color: #999;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LANDING ============ -->
+<div class="landing">
+  <div class="landing-name">KIDNESS</div>
+  <div class="landing-tagline">在成为大人之前</div>
+  <div class="landing-scroll">— scroll —</div>
+</div>
+
+<!-- ============ 01 品牌缘起 ============ -->
+<section>
+  <div class="section-label">01 / 品牌缘起</div>
+  <h2>不是设计一件衣服<br>而是留下一块空白</h2>
+
+  <p>KIDNESS 不是一个关于"创意"或"风格"的品牌。创意太廉价了，每一季都有成千上万个新系列涌向市场。KIDNESS 关心的是另一件事：</p>
+
+  <div class="manifesto">
+    <p>一件衣服真正的生命，不是在设计师的图纸上诞生的，也不是在裁缝的剪刀下完成的。它的生命从你穿上它的第一天开始，在你穿着它走过的每一天里慢慢生长。最后它成为你的，只属于你的，无可替代的。</p>
+  </div>
+
+  <p>这就是 KIDNESS 的全部理念。</p>
+
+  <p>"在成为大人之前"——不是让你停留在童年。而是提醒你：在学会迎合世界之前，你曾经拥有一种笨拙但真实的执拗。那种"我就是喜欢这样"的不讲道理。</p>
+
+  <p>KIDNESS 不是少年品牌。它服务的，是那些在成人世界里仍然保留着少年般敏锐与执拗的人。</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 02 衣服会呼吸 ============ -->
+<section>
+  <div class="section-label">02 / 衣服会呼吸</div>
+  <h2>每个人都把自己穿成了独一无二</h2>
+
+  <p>你做过的每一个动作，都写在衣服上。肩部的摩擦、肘部的折痕、领口的褪色——这不是"穿旧了"，这是"穿成了自己的"。</p>
+
+  <p>同一件衬衫，两个人穿半年，会变成两件完全不同的衬衫。一个习惯右手插袋，一个习惯把袖子卷到小臂。一个天天通勤坐地铁，一个总在户外走。这些痕迹加起来，就是一个人。</p>
+
+  <p>KIDNESS 的衣服拒绝做防皱处理，拒绝做表面抗污涂层，拒绝一切阻止面料"正常衰老"的化学干预。我们希望它变旧。希望它记录你的生活。希望半年后、三年后、十年后，你拿起这件衣服，能想起是在哪个阶段穿着它的。</p>
+
+  <p>这不是环保理念。这是对人与物关系的理解。</p>
+
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 03 设计原则 ============ -->
+<section>
+  <div class="section-label">03 / 设计原则</div>
+
+  <div class="principle">
+    <div class="principle-num">原则 01</div>
+    <div class="principle-title">侘寂——不完美即完整</div>
+    <p>我们保留面料本来的毛边、手缝线的痕迹、不对称的细微错位。这些不是缺陷，是"这件衣服是人做的"的证据。完美的机器产出的东西没有灵魂，不完美才是手工的温度。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">原则 02</div>
+    <div class="principle-title">留白——一件衣服就够了</div>
+    <p>不去堆叠设计元素。一个口袋、一条缝线、一颗纽扣——每一个细节都要有存在的理由。如果去掉它不影响结构，就去掉。让穿着者本身成为造型的最后一块拼图。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">原则 03</div>
+    <div class="principle-title">时间是一层皮肤</div>
+    <p>面料的选择标准不是"看起来怎么样"，而是"穿久了会变成什么样子"。重磅棉麻会有自然磨损，植物染色会逐年褪变，皮革会吸收手部的油脂变得暗沉。这些变化不是损耗，是积累。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">原则 04</div>
+    <div class="principle-title">安静，但不隐形</div>
+    <p>KIDNESS 不靠大 logo、不靠印花、不靠夸张廓形来刷存在感。衣服本身安静到位，穿着者自然有气场。懂的人不需要解释，不懂的人不需要知道。</p>
+  </div>
+
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 04 关于名字 ============ -->
+<section>
+  <div class="section-label">04 / 关于名字</div>
+  <h2>Kid + Kindness + Darkness</h2>
+
+  <p>Kid — 少年气。不是年龄，是一种状态：对一件事认真的能力。</p>
+  <p>Kindness — 善意。对材质的善意、对工艺的善意、对穿着者的善意——不急、不赶、不欺骗。</p>
+  <p>Darkness — 暗。不是黑色，是专注的沉默、不需解释的安静。</p>
+
+  <p>三个词叠在一起，就是 KIDNESS。</p>
+
+  <div class="quote">
+    "在成为大人之前，<br>我们还有未完成的自己。"
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 05 对象 ============ -->
+<section>
+  <div class="section-label">05 / 为谁</div>
+  <h2>给那些不讲道理地认真活着的人</h2>
+
+  <p>18 岁到 30 岁。大学生、刚工作的创意人、做音乐的、画画的、写东西的、做设计的。他们可能预算有限，但对"穿什么"这件事有自己的判断，不会因为流行而妥协。</p>
+
+  <p>他们需要一件衣服，能陪他们度过一段漫长而不确定的日子。不需要多，几件好的就够了。</p>
+
+  <p>KIDNESS 不是大众品牌，也不会成为大众品牌。它不追求让所有人都喜欢，只想让对的人找到它——然后穿着它，安安静静地走自己的路。</p>
+
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ 06 第一章 ============ -->
+<section>
+  <div class="section-label">06 / 第一章 · 未完成</div>
+  <h2>「未完成」——产品的起点</h2>
+
+  <p>KIDNESS 的第一章不叫"2026 春夏"或"2026 秋冬"。"春夏秋冬"是时尚产业的节奏，不是生命的节奏。第一章叫「未完成」。</p>
+
+  <p>几件单品：</p>
+
+  <div class="principle">
+    <div class="principle-num">001</div>
+    <div class="principle-title">静水 · 大衣</div>
+    <p>重磅棉麻混织。不做防皱处理，自然垂落。衣领处留一条手缝线，买家可以选择保留它或拆掉它——你来做最后的决定。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">002</div>
+    <div class="principle-title">倒影 · 衬衫</div>
+    <p>不对称前襟设计。左肩缝线外露。面料经植物染色处理后未被固色固定，随着水洗和穿着，颜色会逐渐变化。</p>
+  </div>
+
+  <div class="principle">
+    <div class="principle-num">003</div>
+    <div class="principle-title">岩石 · 裤</div>
+    <p>廓形介于直筒与宽松之间。口袋位置前后错位，穿着一段时间后布料随身体习惯定型，最终形成只属于你的褶皱。</p>
+  </div>
+
+  <p>三件单品。没有季节性。不是因为"这一季流行阔腿裤所以做阔腿裤"。只是因为这三件衣服，从功能上和审美上，都应该存在。</p>
+
+</section>
+
+<div class="sep"></div>
+
+<!-- ============ CLOSE ============ -->
+<section style="text-align:center;">
+  <p style="text-indent:0; font-size:0.9rem; color:#999; max-width:500px; margin:0 auto;">
+    KIDNESS 不是一个"品牌"在通常意义上的产物。<br>
+    它没有融资、没有团队、没有营销预算。<br>
+    它只有一个想法：衣服应该契合人，<br>
+    而不是让人去适应衣服。
+  </p>
+  <div style="margin-top:3rem; font-size:0.75rem; letter-spacing:0.15em; color:#ccc;">
+    KIDNESS / 第一章 · 未完成
+  </div>
+</section>
+
+<footer>
+  KIDNESS — 在成为大人之前
+</footer>
+
+</body>
+</html>
