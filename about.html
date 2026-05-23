@@ -178,8 +178,7 @@
     color: #2a2825; text-transform: uppercase;
   }
 
-  /* GSAP initial */
-  section, .about-section, .about-img, .about-hr, .banner, .closing { opacity: 0; }
+  /* GSAP initial - removed opacity:0 to prevent page blank on CDN failure */
 </style>
 </head>
 <body>
@@ -327,7 +326,7 @@ overlay.querySelectorAll('a').forEach(link => {
 });
 
 gsap.utils.toArray('.about-section, .about-img, .about-hr, .closing').forEach(el => {
-  gsap.fromTo(el, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+  gsap.from(el, { y: 20, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
 });
 </script>
 
