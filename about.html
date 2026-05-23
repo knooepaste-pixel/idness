@@ -42,6 +42,17 @@
   }
   .nav-toggle span:last-child { margin-bottom: 0; width: 10px; }
 
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(3px, -3px);
+    width: 16px;
+  }
+
   .nav-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0d0d0b; z-index: 40;
     display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
@@ -234,7 +245,7 @@
 
   <div class="about-section">
     <div class="about-col">
-      <p class="about-text"><strong style="font-weight:350;color:#b5b0a6;">Kindness。</strong>之间。不是温柔的善意，是清醒地看见双方。轻不否定重，重不压迫轻。人和衣服的关系是对等的——你改变它，它也改变你。</p>
+      <p class="about-text"><strong style="font-weight:350;color:#b5b0a6;">Kindness。</strong>之间。不是温柔的善，是清醒的善。是不同的重量之间，互相认出，但不抹消差异。</p>
       <p class="about-text">KIDNESS 不评判选轻还是选重。它只指出：你在选择。</p>
     </div>
   </div>
@@ -278,9 +289,11 @@
   <div class="about-section">
     <div class="about-col">
       <div class="about-tag">04 / 名字</div>
-      <p class="text name-text"><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
-      <p class="text name-text"><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
-      <p class="text name-text"><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。</p>
+      <p class="text name-text"><strong>KID</strong> + <strong>DARKNESS</strong> + <strong>KINDNESS</strong> = <strong>KIDNESS</strong>。</p>
+      <p class="text name-text">三个词拼在一起，少了一个字母。<strong>R</strong> 不见了。</p>
+      <p class="text name-text">KID 里有 K + I + D，DARKNESS 里有 D + A + R + K + N + E + S + S，KINDNESS 里有 K + I + N + D + N + E + S + S。它们共享 K、I、D、N、E、S、S——但唯独 <strong>R</strong> 没有被继承。DARKNESS 的 R，在拼合中消失了。</p>
+      <p class="text name-text">这不是疏忽。缺失的 R 是一个视觉矛盾：黑暗的重量被留下了，但它的标记被抹去了。KIDNESS 这个名字本身就在说：你可以承受重量，但不一定要背负它的符号。</p>
+      <p class="text name-text">你看不见 R，但它一直在那里。</p>
     </div>
   </div>
 </section>
