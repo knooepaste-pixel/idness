@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIDNESS — 轻，还是重</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500&family=Inter:wght@100;200;300;400&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #ecebe7;
+    color: #1a1a18;
+    font-family: 'Noto Serif SC', 'Georgia', serif;
+    font-weight: 300;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ===== LANDING ===== */
+  .landing {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a18;
+    color: #d9d6cf;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .landing::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+  }
+  .landing-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .landing-name {
+    font-size: clamp(3.5rem, 14vw, 11rem);
+    font-weight: 200;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 0.35em;
+  }
+  .landing-sub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .landing-line {
+    font-weight: 200;
+    letter-spacing: 0.18em;
+    color: #8a8780;
+  }
+  .landing-line.zh {
+    font-size: clamp(0.85rem, 1.6vw, 1.15rem);
+  }
+  .landing-line.en {
+    font-size: clamp(0.55rem, 0.9vw, 0.7rem);
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    color: #5c5a55;
+    letter-spacing: 0.28em;
+  }
+  .landing-marker {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  .landing-marker span {
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: #5c5a55;
+    margin: 0 auto 0.5rem;
+  }
+  .landing-marker em {
+    font-style: normal;
+    font-size: 0.55rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.25em;
+    color: #5c5a55;
+    text-transform: uppercase;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 5.5rem 2rem;
+  }
+  @media (max-width: 600px) {
+    section { padding: 3.5rem 1.5rem; }
+  }
+
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: #bbb8b0;
+    margin-bottom: 1.8rem;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-weight: 200;
+    font-size: 1.35rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+    color: #1a1a18;
+  }
+  @media (max-width: 600px) { h2 { font-size: 1.15rem; } }
+
+  p {
+    font-size: 0.92rem;
+    margin-bottom: 1.4rem;
+    color: #3a3a36;
+    text-indent: 2em;
+  }
+  @media (max-width: 600px) { p { font-size: 0.88rem; } }
+
+  /* ===== EPIGRAPH ===== */
+  .epigraph {
+    text-align: center;
+    margin: 4rem 0;
+  }
+  .epigraph p {
+    text-indent: 0;
+    font-size: 0.88rem;
+    font-weight: 200;
+    color: #88857e;
+    line-height: 2.2;
+  }
+  .epigraph p:last-child {
+    margin-top: 1.5rem;
+    font-size: 0.72rem;
+    color: #bbb8b0;
+  }
+
+  /* ===== QUESTION ===== */
+  .question {
+    margin: 3.5rem 0;
+    padding: 2.5rem 0;
+    text-align: center;
+    border-top: 1px solid #e0ddd6;
+    border-bottom: 1px solid #e0ddd6;
+  }
+  .question p {
+    text-indent: 0;
+    font-size: 1rem;
+    font-weight: 200;
+    color: #1a1a18;
+    line-height: 2.2;
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+
+  /* ===== PRINCIPLE ===== */
+  .principle {
+    margin: 3.5rem 0;
+  }
+  .principle:last-of-type { margin-bottom: 0; }
+  .principle-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 0.5rem;
+    letter-spacing: 0.35em;
+    color: #c5c2ba;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+  }
+  .principle h3 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+  .principle p {
+    font-size: 0.85rem;
+    color: #4a4a45;
+  }
+
+  .aside {
+    margin: 1.8rem 0 1.8rem 2rem;
+  }
+  .aside p {
+    text-indent: 0;
+    font-size: 0.78rem;
+    color: #a8a59e;
+    font-weight: 200;
+    margin-bottom: 0.4rem;
+  }
+
+  .divider {
+    margin: 4rem 0;
+    text-align: center;
+    font-size: 0.5rem;
+    letter-spacing: 0.6em;
+    color: #ccc9c1;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== CLOSING ===== */
+  .closing {
+    text-align: center;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 3rem 0;
+  }
+  .closing p {
+    text-indent: 0;
+    font-size: 0.82rem;
+    color: #88857e;
+  }
+  .closing p:last-of-type {
+    margin-top: 1rem;
+    color: #c5c2ba;
+    font-size: 0.7rem;
+  }
+
+  hr {
+    border: none;
+    width: 1.5rem;
+    height: 1px;
+    background: #d5d2ca;
+    margin: 0 auto;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem 5rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: #ccc9c1;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="landing">
+  <div class="landing-inner">
+    <div class="landing-name">KIDNESS</div>
+    <div class="landing-sub">
+      <span class="landing-line zh">轻，还是重</span>
+      <span class="landing-line en">lightness or weight</span>
+    </div>
+  </div>
+  <div class="landing-marker">
+    <span></span>
+    <em>scroll</em>
+  </div>
+</div>
+
+<section>
+  <div class="epigraph">
+    <p>"Einmal ist keinmal.<br>只发生一次的事，就像从未发生过。"</p>
+    <p>——米兰·昆德拉</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- 01 -->
+<section>
+  <div class="section-label">01</div>
+  <h2>轻，还是重？</h2>
+
+  <p>这是一个问题。我们不会回答它。</p>
+
+  <p>昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛，而鸿毛的重量是零。零是无法承受的。</p>
+
+  <p>这不是一个形而上学的问题。它每天都在发生：</p>
+
+  <p>你买一件衣服，穿了两次，不想要了。你扔掉它，没有感觉。这是轻。但这轻让你不安——你知道某些东西正在流失，只是你无法命名它。</p>
+
+  <p>你有一件外套，穿了好几年。袖口磨薄了，扣子换过一次，颜色褪到了某个刚好合适的程度。有一天它终于不能穿了。你有一种奇怪的感觉——不是失去了一件物品，是失去了一段时间的容器。这是重。</p>
+
+  <p>KIDNESS 不告诉你应该选轻还是选重。我们只是指出：你在选择。每一次购买、每一次穿着、每一次丢弃，你都在选择。大多数时候你甚至没有意识到自己在选择——这就是轻的诱惑：不用面对选择，也就不必承受选择的后果。</p>
+
+  <p>但我们怀疑，轻是否真的让人自由。</p>
+</section>
+
+<hr>
+
+<!-- 02 -->
+<section>
+  <div class="section-label">02</div>
+
+  <div class="question">
+    <p>如果一件衣服<br>只是被穿过一次就消失了<br>它真的存在过吗？</p>
+  </div>
+
+  <p>这是一个无法用物理回答的问题。物理上说它存在过——但存在过和留下痕迹不是一回事。</p>
+
+  <p>在昆德拉的叙述里，托马斯不断地面临同一个选择：轻还是重。自由还是不自由。漂泊还是停留。他没有选。他一直在两者之间游荡。这不是软弱——这是诚实。</p>
+
+  <p>人与物的关系同样如此。你不能既要一件衣服完全属于你、记录你的时间，又要它永远崭新、随时可以丢弃。轻和重是互斥的。你只能选一个方向。或者，像托马斯一样，在两者之间——不安地、诚实地——来回摇摆。</p>
+
+  <p>KIDNESS 不提供解决方案。我们只是提供一个坐标：这是轻的方向，这是重的方向。你的位置，你自己决定。</p>
+</section>
+
+<hr>
+
+<!-- 03 -->
+<section>
+  <div class="section-label">03 / 原则</div>
+  <h2>几个还不完整的假设</h2>
+  <p>以下不是宣言。宣言是一种过于重的形式。它们只是一些暂时的、可被推翻的假设。</p>
+
+  <div class="principle">
+    <div class="principle-label">关于轻</div>
+    <h3>原则一：衣服不该是负担</h3>
+    <p>它不应束缚你的动作，不应强迫你扮演某种角色，不应在你穿上它的那一刻就告诉你"你应该成为什么样的人"。极简、留白、沉默——这些不是美学选择，是伦理选择。</p>
+    <div class="aside"><p>（但"不是负担"不等于"没有重量"——这是两回事。）</p></div>
+  </div>
+
+  <div class="principle">
+    <div class="principle-label">关于重</div>
+    <h3>原则二：衣服应该承受时间</h3>
+    <p>面料应该随着穿着而变化。颜色应该随着水洗而褪变。边缘应该随着摩擦而磨损。这不是质量的缺陷，这是质量的证据。一件不会变旧的衣服，也不会变老——它只是突然坏掉。而一件会慢慢变旧的衣服，在你穿它的每一天里都在和你对话。</p>
+    <div class="aside"><p>（但"承受时间"不等于"沉重"——这是另一个区别。）</p></div>
+  </div>
+
+  <div class="principle">
+    <div class="principle-label">关于之间</div>
+    <h3>原则三：衣服和人的关系是对等的</h3>
+    <p>你改变衣服，衣服也改变你。这不是一种占有关系——占有是单向的。这是一种互相定义的关系。</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- 04 -->
+<section>
+  <div class="section-label">04</div>
+
+  <div class="question">
+    <p>你能承受<br>一件衣服的重量吗？</p>
+  </div>
+
+  <p>"重量"不是指克重。是指意义。</p>
+
+  <p>当你穿上一件为长期穿着而设计的衣服，你同时也穿上了某种责任感。你承诺了时间。你不确定自己是否能遵守这个承诺——六个月后你还喜欢它吗？一年后它还合身吗？你的生活还会是现在这个样子吗？</p>
+
+  <p>承诺是重的。这就是为什么大多数人选择轻——快时尚的意义不在于价格低廉，而在于零承诺。你不必对一件廉价的衣服负责。穿坏了扔掉，没有任何心理负担。</p>
+
+  <p>但问题是：零承诺的生活，是不是也是一种不能承受的轻？</p>
+
+  <p>KIDNESS 不做承诺。我们只提出这个矛盾，然后把它留给你。</p>
+</section>
+
+<hr>
+
+<!-- 05 -->
+<section>
+  <div class="section-label">05 / 名字</div>
+
+  <p><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
+
+  <p><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
+
+  <p><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。Kindness 不是一个答案，它是一个姿态：我愿意在这个问题上与你站在一起。</p>
+
+  <div style="margin:2rem 0 0; text-align:center;">
+    <p style="text-indent:0; font-size:0.78rem; color:#a8a59e;">KIDNESS 是三个词的交集。<br>而这个交集是一个问题。</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- 06 -->
+<section>
+  <div class="section-label">06 / 一点补充</div>
+
+  <p>KIDNESS 不是一个让人感到温暖的品牌。温暖是轻的，它很快会过去。我们更希望你在面对它的时候，感受到一种冷静的确信——不是"我喜欢这个"的兴奋，而是"这和我有关系"的平静。后者更重。也更有可能是真的。</p>
+</section>
+
+<div class="divider">· &nbsp; · &nbsp; ·</div>
+
+<section>
+  <div class="closing">
+    <p>这不是品牌宣言。</p>
+    <p>这是一个问题的草稿。</p>
+    <p>问题没有结论。<br>结论是留给那些不再问问题的人的。</p>
+  </div>
+</section>
+
+<footer>KIDNESS — a question, not an answer</footer>
+
+</body>
+</html>
