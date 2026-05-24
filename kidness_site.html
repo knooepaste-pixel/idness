@@ -42,6 +42,17 @@
   }
   .nav-toggle span:last-child { margin-bottom: 0; width: 10px; }
 
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(3px, -3px);
+    width: 16px;
+  }
+
   .nav-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0d0d0b; z-index: 40;
     display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
@@ -187,7 +198,8 @@
   .piece:first-of-type { border-top: 0.5px solid #1a1816; }
   .piece-image {
     width: 100%;
-    background-size: cover; background-position: center;
+    background-size: contain; background-position: center;
+    background-repeat: no-repeat;
     background-color: #0d0d0b;
     min-height: 70vh;
   }
@@ -201,6 +213,8 @@
     }
     .piece-image {
       flex: 0 0 55%; min-height: 80vh;
+      background-size: contain;
+      background-repeat: no-repeat;
     }
     .piece-info {
       flex: 0 0 45%; padding: 3rem;
@@ -258,8 +272,7 @@
     color: #2a2825; text-transform: uppercase;
   }
 
-  /* GSAP initial */
-  section, .banner, .landing-marker { opacity: 0; }
+  /* GSAP initial — removed opacity:0 to prevent page blank on CDN failure */
 </style>
 </head>
 <body>
@@ -273,9 +286,9 @@
 
 <div class="nav-overlay" id="navOverlay">
   <a href="#" data-target="philosophy"><span class="nav-num">01</span>哲学</a>
-  <a href="#" data-target="principles"><span class="nav-num">02</span>原则</a>
-  <a href="#" data-target="works"><span class="nav-num">03</span>作品</a>
-  <a href="#" data-target="contact"><span class="nav-num">04</span>联系</a>
+  <a href="#" data-target="works"><span class="nav-num">02</span>作品</a>
+  <a href="#" data-target="contact"><span class="nav-num">03</span>联系</a>
+  <a href="about.html"><span class="nav-num">04</span>About</a>
 </div>
 
 <!-- LANDING -->
@@ -303,7 +316,7 @@
       <div class="section-tag">01</div>
       <h2 class="section-title">轻，还是重？</h2>
       <p class="text">这是一个问题。我们不会回答它。</p>
-      <p class="text">昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛。而鸿毛的重量是零。零无法承受。</p>
+      <p class="text">昆德拉问过。尼采也问过——如果一切将永恒重复，那每一次选择都重如千钧；如果一切只发生一次便永不复返，那一切都轻若鸿毛。</p>
       <p class="text">这不是一个形而上学的问题。它每天都在发生：你买一件衣服，穿两次，不想要了。你扔掉它，没有感觉。这是轻。但这轻让你不安。</p>
       <p class="text">你有一件外套，穿了好几年。袖口磨薄，扣子换过一次。有一天它终于不能穿了。你有一种奇怪的感觉——不是失去了一件物品，是失去了一段时间容器。这是重。</p>
       <p class="text">KIDNESS 不告诉你应该选轻还是选重。我们只是指出：你在选择。</p>
@@ -318,40 +331,6 @@
   </div>
 </section>
 
-<hr class="hr">
-
-<section id="principles">
-  <div class="section section--slim">
-    <div class="col">
-      <div class="section-tag">02 / 原则</div>
-      <h2 class="section-title">几个还不完整的假设</h2>
-      <p class="text text--sm">以下不是宣言。宣言是一种过于重的形式。</p>
-
-      <div class="principle">
-        <div class="principle-label">关于轻</div>
-        <h3>一：衣服不该是负担</h3>
-        <p class="text">它不应束缚你的动作，不应强迫你扮演某种角色。极简、留白、沉默——这些不是美学选择，是伦理选择。</p>
-        <div class="aside"><p class="text">（但"不是负担"不等于"没有重量"。）</p></div>
-      </div>
-
-      <div class="principle">
-        <div class="principle-label">关于重</div>
-        <h3>二：衣服应该承受时间</h3>
-        <p class="text">面料随穿着而变化，颜色随水洗而褪变，边缘随摩擦而磨损。这不是质量的缺陷，是质量的证据。一件不会变旧的衣服，也不会变老——它只是突然坏掉。</p>
-        <div class="aside"><p class="text">（但"承受时间"不等于"沉重"。）</p></div>
-      </div>
-
-      <div class="principle">
-        <div class="principle-label">关于之间</div>
-        <h3>三：衣服和人的关系是对等的</h3>
-        <p class="text">你改变衣服，衣服也改变你。这不是一种占有关系——占有是单向的。这是一种互相定义的关系。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="banner" style="background-image:url('kidness_images/bg_banner1.png');"></div>
-
 <section id="works">
   <div class="section">
     <div class="col--wider">
@@ -363,10 +342,10 @@
 
   <div class="works">
     <div class="piece">
-      <div class="piece-image" style="background-image:url('kidness_images/01_jingshui_coat.png');"></div>
+      <a href="jingshui.html" class="piece-image" style="background-image:url('kidness_images/01_jingshui_coat.png');"></a>
       <div class="piece-info">
         <div class="piece-axis">重的一端</div>
-        <div class="piece-name">静水</div>
+        <a href="jingshui.html" class="piece-name" style="text-decoration:none; color:#c4c0b4;">静水</a>
         <div class="piece-type">大衣 · Overcoat</div>
         <div class="piece-desc">
           及踝超长，A 字立柱剪裁。廓形从髋部以下才缓慢散开。<br>
@@ -439,15 +418,7 @@
 <section id="contact">
   <div class="section section--slim">
     <div class="col">
-      <div class="section-tag">04 / 名字</div>
-
-      <p class="text name-text"><strong>Kid.</strong> 轻。少年还没有被世界定义，还可以成为任何人。这是自由的形态——但自由也是有代价的：你还没有任何可以称量的东西。</p>
-      <p class="text name-text"><strong>Darkness.</strong> 重。生活的暗面——时间、消逝、责任、无法回避的重量。人长大就是学会承受这些的过程。但重也是意义诞生的地方。</p>
-      <p class="text name-text"><strong>Kindness.</strong> 两者之间的空间。不是温柔的善，是清醒的善。是认出"你是轻的，我是重的，我们不同——但这不妨碍我们互相理解"。</p>
-
-      <hr class="hr" style="margin:2.5rem auto;">
-
-      <div class="section-tag" style="margin-top:2rem;">联系</div>
+      <div class="section-tag">联系</div>
       <div class="links">
         <span class="label">社交媒体</span>
         <a href="#">Instagram</a>
@@ -475,27 +446,26 @@ const toggle = document.getElementById('navToggle'), overlay = document.getEleme
 toggle.addEventListener('click', () => { toggle.classList.toggle('active'); overlay.classList.toggle('open'); });
 overlay.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', e => {
-    e.preventDefault(); overlay.classList.remove('open'); toggle.classList.remove('active');
-    const t = document.getElementById(link.dataset.target);
-    if (t) t.scrollIntoView({ behavior: 'smooth' });
+    overlay.classList.remove('open'); toggle.classList.remove('active');
+    if (link.dataset.target) {
+      e.preventDefault();
+      const t = document.getElementById(link.dataset.target);
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
 
-gsap.fromTo('#landingTitle', { y: 40, o: 0 }, { y: 0, o: 1, duration: 2, delay: .3, ease: 'power4.out' });
-gsap.fromTo('#landingSub1', { y: 15, o: 0 }, { y: 0, o: 1, duration: 1.2, delay: 1.4, ease: 'power3.out' });
-gsap.fromTo('#landingSub2', { y: 15, o: 0 }, { y: 0, o: 1, duration: 1.2, delay: 1.8, ease: 'power3.out' });
-gsap.to('#landingMarker', { o: 1, duration: 1, delay: 2.8 });
+gsap.fromTo('#landingTitle', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 2, delay: .3, ease: 'power4.out' });
+gsap.fromTo('#landingSub1', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 1.4, ease: 'power3.out' });
+gsap.fromTo('#landingSub2', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 1.8, ease: 'power3.out' });
+gsap.to('#landingMarker', { opacity: 1, duration: 1, delay: 2.8 });
 gsap.to('#landingBg', { y: '8%', ease: 'none', scrollTrigger: { trigger: '.landing', start: 'top top', end: 'bottom top', scrub: 1.5 } });
 
 gsap.utils.toArray('section, .banner').forEach(el => {
-  gsap.fromTo(el, { y: 25, o: 0 }, { y: 0, o: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+  gsap.fromTo(el, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
 });
 
-gsap.utils.toArray('.principle').forEach((el, i) => {
-  gsap.fromTo(el, { y: 15, o: 0 }, { y: 0, o: 1, duration: .7, delay: i * .1, ease: 'power2.out', scrollTrigger: { trigger: '#principles', start: 'top 80%', toggleActions: 'play none none none' } });
-});
-
-gsap.fromTo('.piece', { y: 25, o: 0 }, { y: 0, o: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '#works', start: 'top 82%', toggleActions: 'play none none none' } });
+gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '#works', start: 'top 82%', toggleActions: 'play none none none' } });
 </script>
 
 </body>

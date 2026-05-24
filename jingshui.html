@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>静水·大衣 — KIDNESS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=LXGW+WenKai&family=Noto+Serif+SC:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: #0d0d0b;
+    color: #c4c0b4;
+    font-family: 'LXGW WenKai', 'Noto Serif SC', 'Songti SC', serif;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1.25rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(13,13,11,0.4);
+    backdrop-filter: blur(20px);
+  }
+  .nav-logo {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #c4c0b4; text-decoration: none; font-weight: 300;
+  }
+  .nav-back {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.45rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: #8a867e; text-decoration: none; font-weight: 300;
+    transition: color 0.3s;
+  }
+  .nav-back:hover { color: #c4c0b4; }
+
+  /* ===== HERO ===== */
+  .detail-hero {
+    padding: 8rem 1.5rem 3rem;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    opacity: 0; transform: translateY(25px);
+  }
+  @media (min-width: 768px) { .detail-hero { padding: 10rem 2.5rem 4rem; } }
+
+  .detail-tag {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; font-weight: 300;
+    letter-spacing: 0.35em; color: #3a3835;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .detail-name {
+    font-size: 1.2rem; font-weight: 300;
+    letter-spacing: 0.08em; color: #c4c0b4;
+    margin-bottom: 0.3rem;
+  }
+  .detail-sub {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.5rem; letter-spacing: 0.25em;
+    color: #55524c; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .detail-axis {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.35em;
+    color: #3a3835; text-transform: uppercase;
+  }
+
+  .hr { border: none; width: 1.5rem; height: 0.5px; background: #2a2825; margin: 2.5rem auto; }
+
+  /* ===== PHILOSOPHY ===== */
+  .philosophy {
+    padding: 2rem 1.5rem 4rem;
+    max-width: 560px;
+    margin: 0 auto;
+    opacity: 0; transform: translateY(25px);
+  }
+  @media (min-width: 768px) { .philosophy { padding: 2rem 2.5rem 6rem; } }
+
+  .philosophy .section-tag {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.35em;
+    color: #3a3835; text-transform: uppercase;
+    margin-bottom: 1.5rem; text-align: center;
+  }
+  .philosophy .section-title {
+    font-size: 0.85rem; font-weight: 300;
+    letter-spacing: 0.06em; color: #c4c0b4;
+    margin-bottom: 2rem; text-align: center;
+  }
+  .philosophy p {
+    font-size: 0.72rem; line-height: 2; color: #8a867e;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+  }
+  .philosophy p em {
+    font-style: normal; color: #b5b0a6;
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery {
+    padding: 2rem 1.5rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) { .gallery { padding: 2rem 2.5rem 8rem; } }
+
+  /* On-model shots: 3:4 portrait — full width, moderate height */
+  .gallery-item {
+    margin-bottom: 6rem;
+    opacity: 0; transform: translateY(25px);
+    text-align: center;
+  }
+  .gallery-item:last-child { margin-bottom: 0; }
+
+  .gallery-image {
+    width: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0d0d0b;
+    min-height: 55vh;
+  }
+  @media (min-width: 768px) { .gallery-image { min-height: 65vh; max-height: 85vh; } }
+
+  /* Flat lay: 4:3 landscape — shorter, wider */
+  .gallery-image.landscape {
+    min-height: 35vh;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) { .gallery-image.landscape { min-height: 45vh; max-height: 55vh; max-width: 100%; } }
+
+  /* Detail row: two 1:1 squares side by side */
+  .detail-row {
+    display: flex; flex-direction: column; gap: 3rem;
+    margin-bottom: 6rem;
+    opacity: 0; transform: translateY(25px);
+  }
+  @media (min-width: 640px) {
+    .detail-row { flex-direction: row; gap: 2rem; }
+  }
+  .detail-col {
+    flex: 1;
+    text-align: center;
+  }
+  .detail-col .gallery-image {
+    min-height: 50vh;
+    max-height: 70vh;
+    aspect-ratio: 1/1;
+    width: 100%;
+  }
+  @media (min-width: 640px) {
+    .detail-col .gallery-image { min-height: 40vh; max-height: 55vh; }
+  }
+
+  .gallery-caption {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .gallery-caption .angle-num {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.35rem; letter-spacing: 0.35em;
+    color: #3a3835; text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .gallery-caption .angle-name {
+    font-size: 0.72rem; font-weight: 300;
+    color: #8a867e; letter-spacing: 0.05em;
+  }
+
+  /* ===== BACK LINK ===== */
+  .back-section {
+    text-align: center; padding: 2rem 1.5rem 5rem;
+  }
+  .back-section a {
+    display: inline-block;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.45rem; letter-spacing: 0.25em;
+    color: #6b6760; text-decoration: none;
+    text-transform: uppercase; transition: color 0.3s;
+    padding: 0.8rem 2rem;
+    border: 0.5px solid #1e1c1a;
+  }
+  .back-section a:hover { color: #c4c0b4; border-color: #3a3835; }
+
+  footer {
+    text-align: center; padding: 3rem 1.5rem 4rem;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.25em;
+    color: #2a2825; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="kidness_site.html" class="nav-logo">KIDNESS</a>
+  <a href="kidness_site.html" class="nav-back">← 返回</a>
+</nav>
+
+<div class="detail-hero" id="detailHero">
+  <div class="detail-tag">001</div>
+  <h1 class="detail-name">静水·大衣</h1>
+  <div class="detail-sub">Still Water Overcoat</div>
+  <div class="detail-axis">重的一端</div>
+</div>
+
+<hr class="hr">
+
+<section class="philosophy" id="philosophy">
+  <div class="section-tag">设计哲学</div>
+  <div class="section-title">承受，才有重量</div>
+  <p>静水是一件你<em>需要承受</em>的大衣。厚重棉麻经纬织纹——穿上它的那一刻，它就压在你肩上。不是压迫的重，是<em>提醒</em>的重。是昆德拉问过的问题：如果一切都只发生一次便永不复返，那就轻若鸿毛。你不想要那种轻。你要的是可触摸的负担——一件提醒你「此刻正在发生」的衣服。</p>
+  <p>它的 A 字廓形从髋部<em>才开始</em>散开。这不是一个急于解脱的形状。它在你身上缓慢展开，像一个悬而未决的问题，在时间里自己找到形态。不对称的双排斜门襟——右门襟长，左门襟短。这是在说：完美的对称是假的。真实的秩序总是歪的。<em>轻是幻觉，重是真相。</em></p>
+  <p>翻折袖口露出浅米白内里。外面是黑——沉默、吸收、保护；里面是浅——柔软、坦白、没有防备。古铜色的贝壳扣不反光。它只是一种安静的在场，像河底的石头：你没有注意它，但它是整个重量的支点。</p>
+  <p>这件大衣会旧。会皱。古铜扣有一天会需要换。这不是损耗。<em>这是积累。</em>每一道褶皱都是一次被记住的寒冷，每一次磨损都是一段时间留下的指纹。这就是重——不是沉重的重，是<em>不轻浮</em>的重。</p>
+</section>
+
+<hr class="hr">
+
+<div class="gallery">
+
+  <!-- On-model: front -->
+  <div class="gallery-item">
+    <div class="gallery-image" style="background-image:url('kidness_images/01_jingshui_01_front.png');"></div>
+    <div class="gallery-caption">
+      <div class="angle-num">01</div>
+      <div class="angle-name">正面扣好</div>
+    </div>
+  </div>
+
+  <!-- On-model: back -->
+  <div class="gallery-item">
+    <div class="gallery-image" style="background-image:url('kidness_images/01_jingshui_03_back.png');"></div>
+    <div class="gallery-caption">
+      <div class="angle-num">02</div>
+      <div class="angle-name">背面</div>
+    </div>
+  </div>
+
+  <!-- On-model: side open -->
+  <div class="gallery-item">
+    <div class="gallery-image" style="background-image:url('kidness_images/01_jingshui_04_sideopen.png');"></div>
+    <div class="gallery-caption">
+      <div class="angle-num">03</div>
+      <div class="angle-name">侧面敞开</div>
+    </div>
+  </div>
+
+  <!-- Flat lay: landscape -->
+  <div class="gallery-item">
+    <div class="gallery-image landscape" style="background-image:url('kidness_images/01_jingshui_05_flat.png');"></div>
+    <div class="gallery-caption">
+      <div class="angle-num">04</div>
+      <div class="angle-name">平铺</div>
+    </div>
+  </div>
+
+  <!-- Detail row: two 1:1 side by side -->
+  <div class="detail-row">
+    <div class="detail-col">
+      <div class="gallery-image" style="background-image:url('kidness_images/01_jingshui_06_detail_placket.png');"></div>
+      <div class="gallery-caption">
+        <div class="angle-num">05</div>
+        <div class="angle-name">门襟扣子特写</div>
+      </div>
+    </div>
+    <div class="detail-col">
+      <div class="gallery-image" style="background-image:url('kidness_images/01_jingshui_07_detail_cuff.png');"></div>
+      <div class="gallery-caption">
+        <div class="angle-num">06</div>
+        <div class="angle-name">袖口平铺</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="back-section">
+  <a href="kidness_site.html">← 返回 KIDNESS</a>
+</div>
+
+<footer>KIDNESS — a question, not an answer</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.fromTo('#detailHero', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: 0.2, ease: 'power3.out' });
+
+gsap.fromTo('#philosophy', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '#philosophy', start: 'top 88%', toggleActions: 'play none none none' } });
+
+gsap.utils.toArray('.gallery-item, .detail-row').forEach(el => {
+  gsap.fromTo(el, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+});
+</script>
+
+</body>
+</html>
