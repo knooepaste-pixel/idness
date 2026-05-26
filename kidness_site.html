@@ -273,6 +273,123 @@
   }
 
   /* GSAP initial — removed opacity:0 to prevent page blank on CDN failure */
+
+  /* ===== BMODAL ===== */
+  .bmodal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.4s;
+  }
+  .bmodal-overlay.open { opacity: 1; pointer-events: all; }
+  .bmodal {
+    background: #141210; border: 0.5px solid #2a2825;
+    padding: 2.5rem 2rem; width: 90%; max-width: 360px;
+    border-radius: 2px;
+  }
+  .bmodal h3 {
+    font-weight: 300; font-size: 0.85rem; letter-spacing: 0.08em;
+    color: #c4c0b4; margin-bottom: 1.5rem; text-align: center;
+  }
+  .bmodal-field {
+    margin-bottom: 1rem;
+  }
+  .bmodal-field label {
+    display: block; font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.25em; color: #3a3835;
+    text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .bmodal-field input, .bmodal-field textarea {
+    width: 100%; background: #0d0d0b; border: 0.5px solid #2a2825;
+    color: #c4c0b4; padding: 0.65rem 0.8rem; font-size: 0.72rem;
+    font-family: 'LXGW WenKai', 'Noto Serif SC', serif; outline: none;
+    transition: border-color 0.3s;
+  }
+  .bmodal-field input:focus, .bmodal-field textarea:focus { border-color: #55524c; }
+  .bmodal-field textarea { resize: vertical; min-height: 80px; }
+  .bmodal-btn {
+    width: 100%; padding: 0.7rem; margin-top: 0.5rem;
+    background: transparent; border: 0.5px solid #3a3835; cursor: pointer;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: #8a867e; transition: all 0.3s;
+  }
+  .bmodal-btn:hover { border-color: #8a867e; color: #c4c0b4; }
+  .bmodal-btn.primary { border-color: #6b6760; color: #c4c0b4; }
+  .bmodal-btn.primary:hover { border-color: #c4c0b4; background: rgba(196,192,180,0.05); }
+  .bmodal-footer {
+    text-align: center; margin-top: 1.2rem;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.45rem;
+    letter-spacing: 0.2em; color: #55524c;
+  }
+  .bmodal-footer a {
+    color: #8a867e; cursor: pointer; text-decoration: none; transition: color 0.3s;
+  }
+  .bmodal-footer a:hover { color: #c4c0b4; }
+  .bmodal-err {
+    text-align: center; font-size: 0.65rem; color: #8b5a5a;
+    margin-top: 0.6rem; min-height: 1.2rem;
+  }
+  .bmodal-close {
+    position: absolute; top: 0.8rem; right: 1rem;
+    background: none; border: none; color: #3a3835; cursor: pointer;
+    font-size: 1rem; transition: color 0.3s;
+  }
+  .bmodal-close:hover { color: #8a867e; }
+
+  /* ===== USER BAR ===== */
+  .user-bar {
+    position: fixed; top: 1.25rem; right: 2rem; z-index: 51;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .user-bar .user-name {
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.45rem;
+    letter-spacing: 0.25em; color: #6b6760; text-transform: uppercase;
+  }
+  .user-bar button {
+    background: none; border: 0.5px solid #2a2825; cursor: pointer;
+    padding: 0.3rem 0.7rem; font-family: 'Inter', Arial, sans-serif;
+    font-size: 0.4rem; letter-spacing: 0.2em; color: #6b6760;
+    text-transform: uppercase; transition: all 0.3s;
+  }
+  .user-bar button:hover { border-color: #6b6760; color: #c4c0b4; }
+
+  /* ===== COMMENTS ===== */
+  .comments { margin: 3rem 0 0; }
+  .comment-item {
+    padding: 1.2rem 0; border-bottom: 0.5px solid #1a1816;
+  }
+  .comment-meta {
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.4rem;
+    letter-spacing: 0.2em; color: #3a3835; margin-bottom: 0.4rem;
+  }
+  .comment-meta strong { color: #6b6760; font-weight: 350; }
+  .comment-body {
+    font-size: 0.72rem; line-height: 1.8; color: #8a867e;
+  }
+
+  /* ===== RESERVATION ===== */
+  .reserve-form { margin: 2rem 0 0; }
+  .reserve-form .bmodal-field { margin-bottom: 0.8rem; }
+  .reserve-form .bmodal-btn { max-width: 200px; }
+
+  /* ===== LOADING SPINNER ===== */
+  .bm-spinner {
+    display: inline-block; width: 12px; height: 12px;
+    border: 0.5px solid #3a3835; border-top-color: #8a867e;
+    border-radius: 50%; animation: bmSpin 0.6s linear infinite;
+    vertical-align: middle; margin-right: 0.4rem;
+  }
+  @keyframes bmSpin { to { transform: rotate(360deg); } }
+
+  /* ===== TOAST ===== */
+  .bm-toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 200;
+    background: #1e1c1a; border: 0.5px solid #2a2825; color: #c4c0b4;
+    padding: 0.6rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.05em;
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+  }
+  .bm-toast.show { opacity: 1; }
+  .bm-toast.error { border-color: #5a3a3a; color: #c4a0a0; }
 </style>
 </head>
 <body>
@@ -283,6 +400,11 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<div class="user-bar" id="userBar">
+  <span class="user-name" id="userNameDisplay"></span>
+  <button id="userBtn">登录</button>
+</div>
 
 <div class="nav-overlay" id="navOverlay">
   <a href="#" data-target="philosophy"><span class="nav-num">01</span>哲学</a>
@@ -435,6 +557,100 @@
   </div>
 </section>
 
+<!-- COMMENTS -->
+<section>
+  <div class="section section--slim">
+    <div class="col">
+      <div class="section-tag">留言</div>
+      <div id="commentList" class="comments"></div>
+      <div class="reserve-form" id="commentFormWrap" style="display:none;">
+        <div class="bmodal-field">
+          <textarea id="commentInput" placeholder="说点什么……"></textarea>
+        </div>
+        <button class="bmodal-btn primary" id="commentSubmit">发布留言</button>
+        <div class="bmodal-err" id="commentErr"></div>
+      </div>
+      <p class="text text--xs text--center" id="commentLoginHint" style="margin-top:1.5rem;">
+        <a style="cursor:pointer;color:#8a867e;" onclick="BmobUI.showLogin()">登录</a> 后可以留言
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section>
+  <div class="section section--slim">
+    <div class="col">
+      <div class="section-tag">预约</div>
+      <h2 class="section-title">对某件作品感兴趣？</h2>
+      <p class="text text--sm">留下信息，我们会联系你。</p>
+      <div class="reserve-form">
+        <div class="bmodal-field">
+          <label>称呼</label>
+          <input type="text" id="reserveName" placeholder="你的名字">
+        </div>
+        <div class="bmodal-field">
+          <label>联系方式（微信 / 手机 / 邮箱）</label>
+          <input type="text" id="reserveContact" placeholder="怎么联系你">
+        </div>
+        <div class="bmodal-field">
+          <label>想了解的作品</label>
+          <input type="text" id="reservePiece" placeholder="静水 / 倒影 / 岩石 / 全部">
+        </div>
+        <div class="bmodal-field">
+          <label>备注（选填）</label>
+          <textarea id="reserveNote" placeholder="有什么想说的"></textarea>
+        </div>
+        <button class="bmodal-btn primary" id="reserveSubmit">提交预约</button>
+        <div class="bmodal-err" id="reserveErr"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGIN MODAL -->
+<div class="bmodal-overlay" id="loginOverlay">
+  <div class="bmodal">
+    <h3>登录</h3>
+    <div class="bmodal-field">
+      <label>用户名</label>
+      <input type="text" id="loginUser" placeholder="你的用户名">
+    </div>
+    <div class="bmodal-field">
+      <label>密码</label>
+      <input type="password" id="loginPass" placeholder="你的密码">
+    </div>
+    <button class="bmodal-btn primary" id="loginSubmit">登录</button>
+    <div class="bmodal-err" id="loginErr"></div>
+    <div class="bmodal-footer">
+      没有账号？<a onclick="BmobUI.showRegister()">注册</a>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div class="bmodal-overlay" id="registerOverlay">
+  <div class="bmodal">
+    <h3>注册</h3>
+    <div class="bmodal-field">
+      <label>用户名</label>
+      <input type="text" id="registerUser" placeholder="设置用户名">
+    </div>
+    <div class="bmodal-field">
+      <label>密码（至少 4 位）</label>
+      <input type="password" id="registerPass" placeholder="设置密码">
+    </div>
+    <button class="bmodal-btn primary" id="registerSubmit">注册</button>
+    <div class="bmodal-err" id="registerErr"></div>
+    <div class="bmodal-footer">
+      已有账号？<a onclick="BmobUI.showLogin()">登录</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="bm-toast" id="bmToast"></div>
+
 <footer>KIDNESS — a question, not an answer</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/gsap.min.js"></script>
@@ -466,6 +682,304 @@ gsap.utils.toArray('section, .banner').forEach(el => {
 });
 
 gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '#works', start: 'top 82%', toggleActions: 'play none none none' } });
+</script>
+
+<!-- ===== Bmob Cloud Integration ===== -->
+<script>
+(function() {
+  'use strict';
+
+  // ── Config ──
+  var BM_APP_ID = '744e3a22174d5dc94f4bb4bd4c6cf58f';
+  var BM_API_KEY = 'f3fa55e16a2f06d2152945f96fe27c7b';
+  var BASE_URL = 'https://api2.bmob.cn/1';
+  var SESSION_KEY = 'kidness_session';
+
+  // ── State ──
+  var session = null; // { userId, sessionToken, username }
+
+  // ── API ──
+  function bmFetch(path, opts, st) {
+    opts = opts || {};
+    var headers = {
+      'X-Bmob-Application-Id': BM_APP_ID,
+      'X-Bmob-REST-API-Key': BM_API_KEY,
+      'Content-Type': 'application/json'
+    };
+    if (st) headers['X-Bmob-Session-Token'] = st;
+    if (opts.headers) { for (var k in opts.headers) headers[k] = opts.headers[k]; }
+    return fetch(BASE_URL + path, {
+      method: opts.method || 'GET',
+      headers: headers,
+      body: opts.body || undefined
+    }).then(function(r) {
+      return r.json().then(function(d) {
+        if (!r.ok) throw new Error(d.error || d.code || 'HTTP ' + r.status);
+        return d;
+      });
+    });
+  }
+
+  // ── Auth ──
+  function apiRegister(u, p) {
+    return bmFetch('/users', { method: 'POST', body: JSON.stringify({ username: u, password: p }) })
+      .then(function(d) { return { userId: d.objectId, sessionToken: d.sessionToken, username: u }; });
+  }
+  function apiLogin(u, p) {
+    var q = 'username=' + encodeURIComponent(u) + '&password=' + encodeURIComponent(p);
+    return bmFetch('/login?' + q).then(function(d) {
+      return { userId: d.objectId, sessionToken: d.sessionToken, username: d.username };
+    });
+  }
+
+  // ── Comments ──
+  function apiLoadComments() {
+    return bmFetch('/classes/Comment?order=-createdAt&limit=50')
+      .then(function(d) { return d.results || []; })
+      .catch(function() { return []; });
+  }
+  function apiPostComment(username, text) {
+    return bmFetch('/classes/Comment', {
+      method: 'POST',
+      body: JSON.stringify({ username: username, text: text })
+    });
+  }
+
+  // ── Reservation ──
+  function apiPostReservation(data) {
+    return bmFetch('/classes/Reservation', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  // ── Session ──
+  function saveSession(s) {
+    session = s;
+    try { localStorage.setItem(SESSION_KEY, JSON.stringify(s)); } catch(e) {}
+  }
+  function loadSession() {
+    try {
+      var s = localStorage.getItem(SESSION_KEY);
+      if (s) { session = JSON.parse(s); return session; }
+    } catch(e) {}
+    return null;
+  }
+  function clearSession() {
+    session = null;
+    try { localStorage.removeItem(SESSION_KEY); } catch(e) {}
+  }
+
+  // ── Toast ──
+  var toastTimer;
+  function toast(msg, isErr) {
+    var el = document.getElementById('bmToast');
+    el.textContent = msg;
+    el.className = 'bm-toast show' + (isErr ? ' error' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2500);
+  }
+
+  // ── UI: Login/Register ──
+  function showLogin() {
+    document.getElementById('loginOverlay').classList.add('open');
+    document.getElementById('registerOverlay').classList.remove('open');
+    document.getElementById('loginErr').textContent = '';
+  }
+  function showRegister() {
+    document.getElementById('registerOverlay').classList.add('open');
+    document.getElementById('loginOverlay').classList.remove('open');
+    document.getElementById('registerErr').textContent = '';
+  }
+  function hideModals() {
+    document.getElementById('loginOverlay').classList.remove('open');
+    document.getElementById('registerOverlay').classList.remove('open');
+  }
+
+  function updateUserBar() {
+    var nameEl = document.getElementById('userNameDisplay');
+    var btn = document.getElementById('userBtn');
+    if (session) {
+      nameEl.textContent = session.username;
+      btn.textContent = '退出';
+      btn.onclick = function() {
+        clearSession();
+        updateUserBar();
+        updateCommentUI();
+        toast('已退出');
+      };
+    } else {
+      nameEl.textContent = '';
+      btn.textContent = '登录';
+      btn.onclick = showLogin;
+    }
+  }
+
+  // ── UI: Comments ──
+  function updateCommentUI() {
+    var form = document.getElementById('commentFormWrap');
+    var hint = document.getElementById('commentLoginHint');
+    if (session) {
+      form.style.display = 'block';
+      hint.style.display = 'none';
+    } else {
+      form.style.display = 'none';
+      hint.style.display = '';
+    }
+  }
+
+  function renderComments(items) {
+    var list = document.getElementById('commentList');
+    if (!items.length) {
+      list.innerHTML = '<p class="text text--sm" style="color:#55524c;">还没有留言，来做第一个。</p>';
+      return;
+    }
+    var html = '';
+    items.forEach(function(c) {
+      var d = c.createdAt ? new Date(c.createdAt.replace(' ','T')+'Z') : new Date();
+      var ts = d.getFullYear() + '.' + pad(d.getMonth()+1) + '.' + pad(d.getDate());
+      html += '<div class="comment-item">'
+        + '<div class="comment-meta"><strong>' + esc(c.username) + '</strong> &nbsp;' + ts + '</div>'
+        + '<div class="comment-body">' + esc(c.text) + '</div>'
+        + '</div>';
+    });
+    list.innerHTML = html;
+  }
+  function pad(n) { return n < 10 ? '0' + n : n; }
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  function loadComments() {
+    apiLoadComments().then(renderComments);
+  }
+
+  // ── Event Bindings ──
+  document.getElementById('userBtn').addEventListener('click', function() {
+    if (!session) showLogin();
+  });
+
+  // Login submit
+  document.getElementById('loginSubmit').addEventListener('click', function() {
+    var u = document.getElementById('loginUser').value.trim();
+    var p = document.getElementById('loginPass').value;
+    var err = document.getElementById('loginErr');
+    if (!u || !p) { err.textContent = '请填写用户名和密码'; return; }
+    err.textContent = '';
+    var btn = this; btn.disabled = true; btn.innerHTML = '<span class="bm-spinner"></span>登录中';
+    apiLogin(u, p).then(function(s) {
+      saveSession(s);
+      hideModals();
+      updateUserBar();
+      updateCommentUI();
+      toast('欢迎，' + s.username);
+    }).catch(function(e) {
+      var m = e.message || '';
+      if (m.indexOf('username or password') > -1 || m.indexOf('101') > -1) m = '用户名或密码错误';
+      else if (m.indexOf('not found') > -1) m = '用户不存在';
+      else if (m.indexOf('Failed to fetch') > -1 || m.indexOf('NetworkError') > -1) m = '网络连接失败';
+      err.textContent = m;
+    }).finally(function() {
+      btn.disabled = false; btn.textContent = '登录';
+    });
+  });
+
+  // Register submit
+  document.getElementById('registerSubmit').addEventListener('click', function() {
+    var u = document.getElementById('registerUser').value.trim();
+    var p = document.getElementById('registerPass').value;
+    var err = document.getElementById('registerErr');
+    if (!u || p.length < 4) { err.textContent = p.length < 4 ? '密码至少4位' : '请填写用户名和密码'; return; }
+    err.textContent = '';
+    var btn = this; btn.disabled = true; btn.innerHTML = '<span class="bm-spinner"></span>注册中';
+    apiRegister(u, p).then(function(s) {
+      saveSession(s);
+      hideModals();
+      updateUserBar();
+      updateCommentUI();
+      toast('注册成功，欢迎你');
+    }).catch(function(e) {
+      var m = e.message || '';
+      if (m.indexOf('already exists') > -1 || m.indexOf('202') > -1) m = '用户名已被占用';
+      else if (m.indexOf('Failed to fetch') > -1 || m.indexOf('NetworkError') > -1) m = '网络连接失败';
+      err.textContent = m;
+    }).finally(function() {
+      btn.disabled = false; btn.textContent = '注册';
+    });
+  });
+
+  // Keyboard: Enter submits
+  document.getElementById('loginPass').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('loginSubmit').click();
+  });
+  document.getElementById('registerPass').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('registerSubmit').click();
+  });
+
+  // Close modals on overlay click
+  document.getElementById('loginOverlay').addEventListener('click', function(e) {
+    if (e.target === this) hideModals();
+  });
+  document.getElementById('registerOverlay').addEventListener('click', function(e) {
+    if (e.target === this) hideModals();
+  });
+
+  // Comment submit
+  document.getElementById('commentSubmit').addEventListener('click', function() {
+    if (!session) { showLogin(); return; }
+    var text = document.getElementById('commentInput').value.trim();
+    var err = document.getElementById('commentErr');
+    if (!text) { err.textContent = '写点什么吧'; return; }
+    err.textContent = '';
+    var btn = this; btn.disabled = true; btn.textContent = '发送中…';
+    apiPostComment(session.username, text).then(function() {
+      document.getElementById('commentInput').value = '';
+      toast('留言发布成功');
+      loadComments();
+    }).catch(function() {
+      err.textContent = '发布失败，请稍后再试';
+    }).finally(function() {
+      btn.disabled = false; btn.textContent = '发布留言';
+    });
+  });
+
+  // Reservation submit
+  document.getElementById('reserveSubmit').addEventListener('click', function() {
+    var name = document.getElementById('reserveName').value.trim();
+    var contact = document.getElementById('reserveContact').value.trim();
+    var piece = document.getElementById('reservePiece').value.trim();
+    var note = document.getElementById('reserveNote').value.trim();
+    var err = document.getElementById('reserveErr');
+    if (!name) { err.textContent = '请填写称呼'; return; }
+    if (!contact) { err.textContent = '请填写联系方式'; return; }
+    err.textContent = '';
+    var btn = this; btn.disabled = true; btn.textContent = '提交中…';
+    apiPostReservation({
+      name: name, contact: contact, piece: piece, note: note
+    }).then(function() {
+      document.getElementById('reserveName').value = '';
+      document.getElementById('reserveContact').value = '';
+      document.getElementById('reservePiece').value = '';
+      document.getElementById('reserveNote').value = '';
+      toast('预约已提交，我们会尽快联系你');
+    }).catch(function() {
+      err.textContent = '提交失败，请稍后再试';
+    }).finally(function() {
+      btn.disabled = false; btn.textContent = '提交预约';
+    });
+  });
+
+  // ── Init ──
+  loadSession();
+  updateUserBar();
+  updateCommentUI();
+  loadComments();
+
+  // Expose to global for inline onclick
+  window.BmobUI = { showLogin: showLogin, showRegister: showRegister };
+})();
 </script>
 
 </body>
