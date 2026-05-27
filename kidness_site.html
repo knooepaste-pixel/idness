@@ -462,7 +462,7 @@
       <button class="auth-tab active" data-tab="login">登录</button>
       <button class="auth-tab" data-tab="register">注册</button>
     </div>
-    <div class="auth-field"><label>邮箱</label><input type="email" id="authUsername" placeholder="用于登录的邮箱地址"></div>
+    <div class="auth-field"><label>用户名</label><input type="text" id="authUsername" placeholder="3-20位字母或数字"></div>
     <div class="auth-field"><label>密码</label><input type="password" id="authPassword" placeholder="至少6位"></div>
     <div class="auth-field" id="regNickField" style="display:none"><label>昵称（选填）</label><input type="text" id="authNickname" placeholder="显示在留言中的名字"></div>
     <p class="auth-err" id="authErr"></p>
@@ -756,67 +756,95 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
   'use strict';
 
   // ── Init ──
-  const app = cloudbase.init({ env: 'kidness', region: 'ap-shanghai' });
+  const app = cloudbase.init({ env: 'kidness-d5g5eg0u728c81b97', region: 'ap-shanghai' });
   const db = app.database();
 
-  // ── Auth: Login / Register (CloudBase v2 API) ──
+  // ── Auth: anonymous login + DB user profiles ──
   let loggedIn = false;
-  let currentUser = null;
-  let userEmail = '';
+  let currentName = '';
 
-  // Check persisted session
+  // Auto anonymous login (always works)
   try {
-    const loginState = await app.auth.getLoginState();
-    if (loginState) {
+    await app.auth.signInAnonymously();
+    console.log('[KIDNESS] anonymous login OK');
+  } catch(e) {
+    console.warn('[KIDNESS] anonymous login failed:', e.message);
+  }
+
+  // Restore session from localStorage
+  try {
+    var saved = JSON.parse(localStorage.getItem('kidness_user') || '{}');
+    if (saved.name) {
       loggedIn = true;
-      currentUser = loginState.user;
-      userEmail = currentUser.email || '';
-      document.getElementById('userNameDisplay').textContent = userEmail.split('@')[0] || '用户';
+      currentName = saved.name;
+      document.getElementById('userNameDisplay').textContent = currentName;
       document.getElementById('userBtn').textContent = '退出';
     }
   } catch(e) {}
 
-  async function doRegister(email, password, nickname) {
-    const { data, error } = await app.auth.signUp({ email, password });
-    if (error) throw new Error(error.message || '注册失败');
-    const loginResult = await app.auth.signInWithPassword({ email, password });
-    if (loginResult.error) throw new Error(loginResult.error.message || '登录失败');
-    if (nickname) {
-      await db.collection('users').add({ _id: email, nickname, createdAt: new Date() });
+  // ── Simple password hash (not cryptographically strong, but works for a brand site) ──
+  function simpleHash(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) { h = ((h << 5) - h + s.charCodeAt(i)) | 0; }
+    return 'h_' + Math.abs(h).toString(36);
+  }
+
+  // ── Register: save to DB ──
+  async function doRegister(username, password, nickname) {
+    var key = simpleHash(username.toLowerCase());
+    var hash = simpleHash(password);
+    // Check if username exists
+    var exist = await db.collection('users').where({ _id: key }).get();
+    if (exist.data && exist.data.length > 0) {
+      throw new Error('该用户名已被注册');
     }
-    const state = await app.auth.getLoginState();
-    currentUser = state.user;
-    userEmail = email;
+    await db.collection('users').add({
+      _id: key,
+      username: username,
+      password: hash,
+      nickname: nickname || username,
+      createdAt: new Date()
+    });
+    // Auto login
+    var displayName = nickname || username;
+    localStorage.setItem('kidness_user', JSON.stringify({ name: displayName }));
     loggedIn = true;
+    currentName = displayName;
     updateUserUI();
     document.getElementById('authModal').style.display = 'none';
-    toast('注册成功，欢迎 ' + (nickname || email.split('@')[0]));
+    toast('注册成功，欢迎 ' + displayName);
   }
 
-  async function doLogin(email, password) {
-    const { data, error } = await app.auth.signInWithPassword({ email, password });
-    if (error) throw new Error(error.message || '登录失败');
-    const state = await app.auth.getLoginState();
-    currentUser = state.user;
-    userEmail = email;
+  // ── Login: check against DB ──
+  async function doLogin(username, password) {
+    var key = simpleHash(username.toLowerCase());
+    var hash = simpleHash(password);
+    var exist = await db.collection('users').where({ _id: key, password: hash }).get();
+    if (!exist.data || exist.data.length === 0) {
+      throw new Error('用户名或密码错误');
+    }
+    var user = exist.data[0];
+    var displayName = user.nickname || user.username;
+    localStorage.setItem('kidness_user', JSON.stringify({ name: displayName }));
     loggedIn = true;
+    currentName = displayName;
     updateUserUI();
     document.getElementById('authModal').style.display = 'none';
-    toast('登录成功');
+    toast('登录成功，欢迎回来 ' + displayName);
   }
 
+  // ── Logout ──
   async function doLogout() {
-    await app.auth.signOut();
+    localStorage.removeItem('kidness_user');
     loggedIn = false;
-    currentUser = null;
-    userEmail = '';
+    currentName = '';
     updateUserUI();
     toast('已退出登录');
   }
 
   function updateUserUI() {
-    if (loggedIn && userEmail) {
-      document.getElementById('userNameDisplay').textContent = userEmail.split('@')[0];
+    if (loggedIn && currentName) {
+      document.getElementById('userNameDisplay').textContent = currentName;
       document.getElementById('userBtn').textContent = '退出';
     } else {
       document.getElementById('userNameDisplay').textContent = '访客';
@@ -859,20 +887,19 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     var password = document.getElementById('authPassword').value.trim();
     var err = document.getElementById('authErr');
     err.textContent = '';
-    if (!email || email.indexOf('@') < 0) { err.textContent = '请输入有效邮箱'; return; }
+    if (!username || username.length < 3) { err.textContent = '用户名至少3位'; return; }
     if (!password || password.length < 6) { err.textContent = '密码至少6位'; return; }
     var btn = this; btn.disabled = true; btn.textContent = '请稍候…';
     try {
       if (authTab === 'register') {
         var nickname = document.getElementById('authNickname').value.trim();
-        await doRegister(email, password, nickname);
+        await doRegister(username, password, nickname);
       } else {
-        await doLogin(email, password);
+        await doLogin(username, password);
       }
     } catch(e) {
       var msg = e.message || '操作失败';
-      if (msg.includes('already exists') || msg.includes('already registered')) msg = '该邮箱已被注册';
-      if (msg.includes('invalid') || msg.includes('wrong password')) msg = '邮箱或密码错误';
+      if (msg.includes('已被注册')) msg = '该用户名已被注册';
       err.textContent = msg;
     } finally {
       btn.disabled = false;
