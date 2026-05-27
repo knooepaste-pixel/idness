@@ -338,7 +338,6 @@
 
   /* ===== USER BAR ===== */
   .user-bar {
-    position: fixed; top: 1.25rem; right: 2rem; z-index: 51;
     display: flex; align-items: center; gap: 0.8rem;
   }
   .user-bar .user-name {
@@ -444,16 +443,15 @@
 <body>
 
 <nav>
+  <div class="user-bar" id="userBar">
+    <span class="user-name" id="userNameDisplay">访客</span>
+    <button id="userBtn">登录</button>
+  </div>
   <a href="#" class="nav-logo">KIDNESS</a>
   <button class="nav-toggle" id="navToggle" aria-label="menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
-<div class="user-bar" id="userBar">
-  <span class="user-name" id="userNameDisplay">访客</span>
-  <button id="userBtn">登录</button>
-</div>
 
 <!-- ===== Login/Register Modal ===== -->
 <div class="auth-modal-overlay" id="authModal" style="display:none">
