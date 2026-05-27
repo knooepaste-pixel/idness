@@ -27,7 +27,7 @@
   .nav-back:hover { color:#c4c0b4; }
   /* HERO */
   .hero { height:70vh; position:relative; overflow:hidden; }
-  .hero img { width:100%; height:100%; object-fit:cover; filter:brightness(0.9); }
+  .hero img { width:100%; height:100%; object-fit:contain; background:#0d0d0b; }
   .hero-title {
     position:absolute; bottom:3rem; left:2rem; z-index:2;
   }
@@ -42,8 +42,8 @@
   .section p { margin-bottom:1.2rem; font-size:0.82rem; color:#8a867e; }
   .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem; }
   .detail-item { border-top:0.5px solid #1a1816; padding-top:1rem; }
-  .detail-label { font-family:'Inter',sans-serif; font-size:0.4rem; letter-spacing:0.25em; color:#3a3835; text-transform:uppercase; margin-bottom:0.4rem; }
-  .detail-value { font-size:0.75rem; color:#8a867e; }
+  .detail-label { font-family:'Inter',sans-serif; font-size:0.65rem; letter-spacing:0.2em; color:#6b6760; text-transform:uppercase; margin-bottom:0.4rem; }
+  .detail-value { font-size:0.9rem; color:#c4c0b4; }
   /* GALLERY */
   .gallery { display:flex; gap:1px; margin-top:2rem; flex-wrap:wrap; }
   .gallery img { width:calc(50% - 0.5px); object-fit:cover; }
@@ -54,22 +54,22 @@
     padding: 1.2rem 0; border-bottom: 0.5px solid #1a1816;
   }
   .comment-meta {
-    font-family: 'Inter', Arial, sans-serif; font-size: 0.4rem;
-    letter-spacing: 0.2em; color: #3a3835; margin-bottom: 0.4rem;
+    font-family: 'Inter', Arial, sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.15em; color: #6b6760; margin-bottom: 0.4rem;
   }
-  .comment-meta strong { color: #6b6760; font-weight: 350; }
-  .comment-body { font-size: 0.72rem; line-height: 1.8; color: #8a867e; }
+  .comment-meta strong { color: #8a867e; font-weight: 350; }
+  .comment-body { font-size: 0.85rem; line-height: 1.8; color: #c4c0b4; }
   .comment-form { margin-top:2rem; }
   .comment-form textarea {
     width:100%; background:#0d0d0b; border:0.5px solid #2a2825; color:#c4c0b4;
-    padding:0.8rem; font-family:inherit; font-size:0.72rem; resize:vertical;
+    padding:0.8rem; font-family:inherit; font-size:0.85rem; resize:vertical;
     min-height:80px; outline:none;
   }
   .comment-form textarea:focus { border-color:#8a867e; }
   .comment-form button {
     margin-top:0.8rem; background:none; border:0.5px solid #2a2825;
     color:#c4c0b4; padding:0.5rem 1.5rem; cursor:pointer;
-    font-family:'Inter',sans-serif; font-size:0.45rem; letter-spacing:0.2em;
+    font-family:'Inter',sans-serif; font-size:0.55rem; letter-spacing:0.15em;
     text-transform:uppercase; transition:all 0.3s;
   }
   .comment-form button:hover { border-color:#8a867e; }
