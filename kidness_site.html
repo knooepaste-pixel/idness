@@ -749,20 +749,14 @@ gsap.utils.toArray('section, .banner').forEach(el => {
 gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '#works', start: 'top 82%', toggleActions: 'play none none none' } });
 </script>
 
-<!-- ===== CloudBase Integration ===== -->
-<script src="https://static.cloudbase.net/cloudbase-js-sdk/2.28.6/cloudbase.full.js"></script>
 <script>
 (async function() {
   'use strict';
 
-  // ── Init ──
-  const app = cloudbase.init({ env: 'kidness-d5g5eg0u728c81b97', region: 'ap-shanghai' });
-  const db = app.database();
-
-  // ── Auth: server API (multi-device sync) ──
+  // ── API helper ──
+  const API = '/api';
   let loggedIn = false;
   let currentName = '';
-  const API = '/api';
 
   async function apiCall(path, data) {
     var resp = await fetch(API + path, {
@@ -882,13 +876,13 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     }
   });
 
-  // ── Comments (unchanged) ──
-  function loadComments() {
-    db.collection('comments').orderBy('createdAt', 'desc').limit(50).get()
-      .then(function(res) {
-        renderComments(res.data || []);
-      })
-      .catch(function() {});
+  // ── Comments (server API) ──
+  async function loadComments() {
+    try {
+      var resp = await fetch(API + '/comments');
+      var result = await resp.json();
+      renderComments(result.items || []);
+    } catch(e) {}
   }
 
   function renderComments(items) {
@@ -899,7 +893,7 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     }
     var html = '';
     items.forEach(function(c) {
-      var d = c.createdAt ? new Date(c.createdAt) : new Date();
+      var d = c.createdAt ? new Date(c.createdAt * 1000) : new Date();
       var ts = d.getFullYear() + '.' + pad(d.getMonth()+1) + '.' + pad(d.getDate());
       html += '<div class="comment-item">'
         + '<div class="comment-meta"><strong>' + esc(c.name || '匿名') + '</strong> &nbsp;' + ts + '</div>'
@@ -909,9 +903,9 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     list.innerHTML = html;
   }
 
-  // ── Reservation ──
+  // ── Reservation (server API) ──
   async function submitReservation(data) {
-    await db.collection('reservations').add(data);
+    await apiCall('/reservations', data);
   }
 
   // ── Helpers ──
@@ -941,29 +935,26 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
   nameField.innerHTML = '<label>昵称</label><input type="text" id="commentName" placeholder="你的名字（选填）">';
   document.getElementById('commentFormWrap').insertBefore(nameField, document.getElementById('commentFormWrap').firstChild);
 
-  document.getElementById('commentSubmit').addEventListener('click', function() {
-    if (!loggedIn) { toast('连接中，请稍后再试', true); return; }
+  document.getElementById('commentSubmit').addEventListener('click', async function() {
     var name = document.getElementById('commentName').value.trim() || '匿名';
     var text = document.getElementById('commentInput').value.trim();
     var err = document.getElementById('commentErr');
     if (!text) { err.textContent = '写点什么吧'; return; }
     err.textContent = '';
     var btn = this; btn.disabled = true; btn.textContent = '发送中…';
-    db.collection('comments').add({ name: name, text: text, createdAt: new Date() })
-      .then(function() {
-        document.getElementById('commentInput').value = '';
-        toast('留言发布成功');
-        loadComments();
-      }).catch(function(e) {
-        err.textContent = '发布失败：' + (e.message || '请稍后再试');
-      }).finally(function() {
-        btn.disabled = false; btn.textContent = '发布留言';
-      });
+    try {
+      await apiCall('/comments/add', { name: name, text: text });
+      document.getElementById('commentInput').value = '';
+      toast('留言发布成功');
+      loadComments();
+    } catch(e) {
+      err.textContent = '发布失败：' + (e.message || '请稍后再试');
+    }
+    btn.disabled = false; btn.textContent = '发布留言';
   });
 
   // ── Reservation Submit ──
-  document.getElementById('reserveSubmit').addEventListener('click', function() {
-    if (!loggedIn) { toast('连接中，请稍后再试', true); return; }
+  document.getElementById('reserveSubmit').addEventListener('click', async function() {
     var name = document.getElementById('reserveName').value.trim();
     var contact = document.getElementById('reserveContact').value.trim();
     var piece = document.getElementById('reservePiece').value.trim();
@@ -973,17 +964,16 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     if (!contact) { err.textContent = '请填写联系方式'; return; }
     err.textContent = '';
     var btn = this; btn.disabled = true; btn.textContent = '提交中…';
-    submitReservation({ name: name, contact: contact, piece: piece, note: note, createdAt: new Date() })
-      .then(function() {
-        ['reserveName','reserveContact','reservePiece','reserveNote'].forEach(function(id) {
-          document.getElementById(id).value = '';
-        });
-        toast('预约已提交，我们会尽快联系你');
-      }).catch(function(e) {
-        err.textContent = '提交失败：' + (e.message || '请稍后再试');
-      }).finally(function() {
-        btn.disabled = false; btn.textContent = '提交预约';
+    try {
+      await submitReservation({ name: name, contact: contact, piece: piece, note: note });
+      ['reserveName','reserveContact','reservePiece','reserveNote'].forEach(function(id) {
+        document.getElementById(id).value = '';
       });
+      toast('预约已提交，我们会尽快联系你');
+    } catch(e) {
+      err.textContent = '提交失败：' + (e.message || '请稍后再试');
+    }
+    btn.disabled = false; btn.textContent = '提交预约';
   });
 
   // ── Init ──
