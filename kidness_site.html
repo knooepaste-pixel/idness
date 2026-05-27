@@ -462,7 +462,7 @@
       <button class="auth-tab active" data-tab="login">登录</button>
       <button class="auth-tab" data-tab="register">注册</button>
     </div>
-    <div class="auth-field"><label>用户名</label><input type="text" id="authUsername" placeholder="3-20位字母或数字"></div>
+    <div class="auth-field"><label>邮箱</label><input type="email" id="authUsername" placeholder="用于登录的邮箱地址"></div>
     <div class="auth-field"><label>密码</label><input type="password" id="authPassword" placeholder="至少6位"></div>
     <div class="auth-field" id="regNickField" style="display:none"><label>昵称（选填）</label><input type="text" id="authNickname" placeholder="显示在留言中的名字"></div>
     <p class="auth-err" id="authErr"></p>
@@ -759,9 +759,10 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
   const app = cloudbase.init({ env: 'kidness', region: 'ap-shanghai' });
   const db = app.database();
 
-  // ── Auth: Login / Register ──
+  // ── Auth: Login / Register (CloudBase v2 API) ──
   let loggedIn = false;
   let currentUser = null;
+  let userEmail = '';
 
   // Check persisted session
   try {
@@ -769,29 +770,35 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     if (loginState) {
       loggedIn = true;
       currentUser = loginState.user;
-      document.getElementById('userNameDisplay').textContent = currentUser.username || '用户';
+      userEmail = currentUser.email || '';
+      document.getElementById('userNameDisplay').textContent = userEmail.split('@')[0] || '用户';
       document.getElementById('userBtn').textContent = '退出';
     }
   } catch(e) {}
 
-  async function doRegister(username, password, nickname) {
-    await app.auth.signUpWithUsernameAndPassword(username, password);
-    await app.auth.signInWithUsernameAndPassword(username, password);
+  async function doRegister(email, password, nickname) {
+    const { data, error } = await app.auth.signUp({ email, password });
+    if (error) throw new Error(error.message || '注册失败');
+    const loginResult = await app.auth.signInWithPassword({ email, password });
+    if (loginResult.error) throw new Error(loginResult.error.message || '登录失败');
     if (nickname) {
-      await db.collection('users').add({ _id: username, nickname, createdAt: new Date() });
+      await db.collection('users').add({ _id: email, nickname, createdAt: new Date() });
     }
     const state = await app.auth.getLoginState();
     currentUser = state.user;
+    userEmail = email;
     loggedIn = true;
     updateUserUI();
     document.getElementById('authModal').style.display = 'none';
-    toast('注册成功，欢迎 ' + (nickname || username));
+    toast('注册成功，欢迎 ' + (nickname || email.split('@')[0]));
   }
 
-  async function doLogin(username, password) {
-    await app.auth.signInWithUsernameAndPassword(username, password);
+  async function doLogin(email, password) {
+    const { data, error } = await app.auth.signInWithPassword({ email, password });
+    if (error) throw new Error(error.message || '登录失败');
     const state = await app.auth.getLoginState();
     currentUser = state.user;
+    userEmail = email;
     loggedIn = true;
     updateUserUI();
     document.getElementById('authModal').style.display = 'none';
@@ -802,13 +809,14 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     await app.auth.signOut();
     loggedIn = false;
     currentUser = null;
+    userEmail = '';
     updateUserUI();
     toast('已退出登录');
   }
 
   function updateUserUI() {
-    if (loggedIn && currentUser) {
-      document.getElementById('userNameDisplay').textContent = currentUser.username || '用户';
+    if (loggedIn && userEmail) {
+      document.getElementById('userNameDisplay').textContent = userEmail.split('@')[0];
       document.getElementById('userBtn').textContent = '退出';
     } else {
       document.getElementById('userNameDisplay').textContent = '访客';
@@ -851,20 +859,20 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     var password = document.getElementById('authPassword').value.trim();
     var err = document.getElementById('authErr');
     err.textContent = '';
-    if (!username || username.length < 3) { err.textContent = '用户名至少3位'; return; }
+    if (!email || email.indexOf('@') < 0) { err.textContent = '请输入有效邮箱'; return; }
     if (!password || password.length < 6) { err.textContent = '密码至少6位'; return; }
     var btn = this; btn.disabled = true; btn.textContent = '请稍候…';
     try {
       if (authTab === 'register') {
         var nickname = document.getElementById('authNickname').value.trim();
-        await doRegister(username, password, nickname);
+        await doRegister(email, password, nickname);
       } else {
-        await doLogin(username, password);
+        await doLogin(email, password);
       }
     } catch(e) {
       var msg = e.message || '操作失败';
-      if (msg.includes('already exists')) msg = '用户名已被注册';
-      if (msg.includes('invalid')) msg = '用户名或密码错误';
+      if (msg.includes('already exists') || msg.includes('already registered')) msg = '该邮箱已被注册';
+      if (msg.includes('invalid') || msg.includes('wrong password')) msg = '邮箱或密码错误';
       err.textContent = msg;
     } finally {
       btn.disabled = false;
