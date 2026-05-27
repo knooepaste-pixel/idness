@@ -759,19 +759,11 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
   const app = cloudbase.init({ env: 'kidness-d5g5eg0u728c81b97', region: 'ap-shanghai' });
   const db = app.database();
 
-  // ── Auth: anonymous login + DB user profiles ──
+  // ── Auth: localStorage-based register/login ──
   let loggedIn = false;
   let currentName = '';
 
-  // Auto anonymous login (always works)
-  try {
-    await app.auth.signInAnonymously();
-    console.log('[KIDNESS] anonymous login OK');
-  } catch(e) {
-    console.warn('[KIDNESS] anonymous login failed:', e.message);
-  }
-
-  // Restore session from localStorage
+  // Restore session
   try {
     var saved = JSON.parse(localStorage.getItem('kidness_user') || '{}');
     if (saved.name) {
@@ -782,29 +774,27 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     }
   } catch(e) {}
 
-  // ── Simple password hash (not cryptographically strong, but works for a brand site) ──
+  // ── Simple hash ──
   function simpleHash(s) {
     var h = 0;
     for (var i = 0; i < s.length; i++) { h = ((h << 5) - h + s.charCodeAt(i)) | 0; }
     return 'h_' + Math.abs(h).toString(36);
   }
 
-  // ── Register: save to DB ──
+  // ── Register: save to localStorage ──
   async function doRegister(username, password, nickname) {
     var key = simpleHash(username.toLowerCase());
-    var hash = simpleHash(password);
-    // Check if username exists
-    var exist = await db.collection('users').where({ _id: key }).get();
-    if (exist.data && exist.data.length > 0) {
+    // Check all stored users
+    var allUsers = JSON.parse(localStorage.getItem('kidness_all_users') || '{}');
+    if (allUsers[key]) {
       throw new Error('该用户名已被注册');
     }
-    await db.collection('users').add({
-      _id: key,
+    allUsers[key] = {
       username: username,
-      password: hash,
-      nickname: nickname || username,
-      createdAt: new Date()
-    });
+      password: simpleHash(password),
+      nickname: nickname || username
+    };
+    localStorage.setItem('kidness_all_users', JSON.stringify(allUsers));
     // Auto login
     var displayName = nickname || username;
     localStorage.setItem('kidness_user', JSON.stringify({ name: displayName }));
@@ -815,15 +805,15 @@ gsap.fromTo('.piece', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .9, s
     toast('注册成功，欢迎 ' + displayName);
   }
 
-  // ── Login: check against DB ──
+  // ── Login: check localStorage ──
   async function doLogin(username, password) {
     var key = simpleHash(username.toLowerCase());
     var hash = simpleHash(password);
-    var exist = await db.collection('users').where({ _id: key, password: hash }).get();
-    if (!exist.data || exist.data.length === 0) {
+    var allUsers = JSON.parse(localStorage.getItem('kidness_all_users') || '{}');
+    var user = allUsers[key];
+    if (!user || user.password !== hash) {
       throw new Error('用户名或密码错误');
     }
-    var user = exist.data[0];
     var displayName = user.nickname || user.username;
     localStorage.setItem('kidness_user', JSON.stringify({ name: displayName }));
     loggedIn = true;
